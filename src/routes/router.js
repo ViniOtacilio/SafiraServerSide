@@ -1,5 +1,4 @@
 const express = require('express');
-
 const { registerController } = require('../controllers/registerController');
 const { createUser } = require('../controllers/registerController');
 
