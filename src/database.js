@@ -8,9 +8,5 @@ const pool = new Pool({
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
 });
-// pool.query('SELECT NOW()', (err, res) => {
-//   console.log(err, res) 
-//   pool.end() 
-// });
 
 module.exports = { pool };

@@ -34,10 +34,11 @@ const createNewUser = async (name, email, password, passwordRepeated) => {
             errors.push({message: "Email já existente"});
             throw errors;
           }
+          // Se estiver tudo certo cria a conta do usuário
           else {
             pool.query(
-              `INSERT INTO users (username, email, password)
-               VALUES ($1, $2, $3)
+              `INSERT INTO users (username, email, password, date_created)
+               VALUES ($1, $2, $3, current_timestamp)
                RETURNING user_id, password`, [name, email, hashedPassword], (err, result) => {
                 if (err) {
                   throw err
