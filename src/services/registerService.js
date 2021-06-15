@@ -10,7 +10,7 @@ const createNewUser = async (name, email, password, passwordRepeated) => {
     }
   
     if (password.length < 6) {
-      errors.push({ message: "Sua senha deve ter mais do que 6 números." });
+      errors.push({ message: "Sua senha deve ser maior que 6 caracteres." });
     }
   
     if (password != passwordRepeated) {
@@ -18,18 +18,35 @@ const createNewUser = async (name, email, password, passwordRepeated) => {
     }
   
     if (errors.length > 0) {
-      return response.json({errors});
+      throw errors;
     } else {
       let hashedPassword = await bcrypt.hash(password,10);
       
+
+      // Checa se há um usuário com o mesmo email
       pool.query(
         `SELECT * FROM users
         WHERE email = $1`,[email], (error,results) => {
           if(error){
             throw error;
           }
-          console.log('reach here');
-          console.log(results.rows);
+          if(results.rows.length > 0) {
+            errors.push({message: "Email já existente"});
+            throw errors;
+          }
+          else {
+            pool.query(
+              `INSERT INTO users (username, email, password)
+               VALUES ($1, $2, $3)
+               RETURNING user_id, password`, [name, email, hashedPassword], (err, result) => {
+                if (err) {
+                  throw err
+                }
+               }
+            )
+          }
+
+
         }
       )
     }
