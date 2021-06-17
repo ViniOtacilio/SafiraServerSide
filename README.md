@@ -1,4 +1,3 @@
-# SafiraServerSide
-Solução server side para a aplicação Safira
+Para rodar o back:
 
-rodar comando npm run dev
+npm run dev
