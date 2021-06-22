@@ -27,7 +27,7 @@ function initialize(passport) {
           });
         }
         else {
-            return done(null, false, { message: "Usuário não encntrado" });
+            return done(null, false, { message: "Usuário não encontrado" });
         }
       }
     );
@@ -43,7 +43,7 @@ function initialize(passport) {
     )
   );
 
-  passport.serializeuser((user, done) => done(null, user.id));
+  passport.serializeUser((user, done) => done(null, user.id));
 
   passport.deserializeUser((id, done) => {
       pool.query(
