@@ -22,11 +22,13 @@ function initialize(passport) {
             if (isMatch) {
               return done(null, user);
             } else {
-              return done(null, false, { message: "A senha não está correta" });
+                console.log("A senha não está correta");
+                return done(null, false, { message: "A senha não está correta" });
             }
           });
         }
         else {
+            console.log("Usuário não encontrado");
             return done(null, false, { message: "Usuário não encontrado" });
         }
       }

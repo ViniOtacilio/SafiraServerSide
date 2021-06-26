@@ -4,40 +4,50 @@ const express = require("express");
 const app = express();
 const routes = require("./routes/router");
 const session = require("express-session");
+const initializePassport = require("./utils/passportConfig.js");
+
 
 app.use(express.json());
 
 
 app.get("/", (request, response) => {
-    return response.json({ message: "Server is up" });
-    console.log("conectado ao banco");
+    return response.json({ message: "Server is up"});
+   
 });
 
 app.use("/api", routes);
 
 //LOGIN
+initializePassport(passport);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(
     session({
-        // Key we want to keep secret which will encrypt all of our information
         secret: process.env.SESSION_SECRET,
-        // Should we resave our session variables if nothing has changes which we dont
         resave: false,
-        // Save empty value if there is no vaue which we do not want to do
         saveUninitialized: false
     })
 );
 
-app.post(
-    '/login',
-    passport.authenticate("local"),
-    function (req, res) {
-        res.redirect('/');
-    }
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
 );
+
+app.post('/users/login', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) { return next(err) }
+        if (!user) { return res.json({ message: info.message }) }
+        res.json({ message: "Usuario logado:" + user.username });
+    })(req, res, next);
+});
 //LOGIN
+
 
 app.listen(3333);
 
