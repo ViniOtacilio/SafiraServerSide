@@ -15,6 +15,7 @@ function initialize(passport) {
 
         if (results.rows.length > 0) {
           const user = results.rows[0];
+          const id = user.user_id;
           bcrypt.compare(password, user.password, (err, isMatch) => {
             if (err) {
               throw err;
@@ -22,12 +23,14 @@ function initialize(passport) {
             if (isMatch) {
               return done(null, user);
             } else {
-              return done(null, false, { message: "A senha não está correta" });
+                console.log("A senha não está correta");
+                return done(null, false, { message: "A senha não está correta" });
             }
           });
         }
         else {
-            return done(null, false, { message: "Usuário não encntrado" });
+            console.log("Usuário não encontrado");
+            return done(null, false, { message: "Usuário não encontrado" });
         }
       }
     );
@@ -43,11 +46,12 @@ function initialize(passport) {
     )
   );
 
-  passport.serializeuser((user, done) => done(null, user.id));
-
+  passport.serializeUser((user, done) => done(null, user));
+ 
   passport.deserializeUser((id, done) => {
+    console.log(id['user_id'])
       pool.query(
-          ` SELECT * FROM users where ID = $1 `, [id], (err, result) => {
+          `SELECT * FROM users where user_id = $1`, [id['user_id']], (err, results) => {
               if (err) {
                   throw err;
               }

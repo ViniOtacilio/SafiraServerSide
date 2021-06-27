@@ -1,4 +1,4 @@
-const { registerService } = require('../services/registerService');
+//const { registerService } = require('../services/registerService');
 
 const { createNewUser } = require('../services/registerService');
 
