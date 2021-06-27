@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 //const passport = require("../utils/passportConfig.js");
 const express = require("express");
 const app = express();
@@ -16,4 +14,3 @@ app.post("/login",
 app.get('/login',  (request, response ) => {
     return response.json({ message: "login" });
 })
->>>>>>> 8ade4bf53fccc2416bb36a6202b886525d755b12
