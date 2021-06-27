@@ -11,8 +11,8 @@ app.use(express.json());
 
 
 app.get("/", (request, response) => {
-    return response.json({ message: "Server is up"});
-   
+    return response.json({ message: "Server is up" });
+
 });
 
 app.use("/api", routes);
@@ -52,5 +52,5 @@ app.post('/users/login', function (req, res, next) {
 app.listen(3333);
 
 module.exports = {
-  app
+    app
 };
