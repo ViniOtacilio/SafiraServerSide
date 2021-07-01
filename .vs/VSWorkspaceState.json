@@ -3,7 +3,9 @@
     "",
     "\\src",
     "\\src\\controllers",
-    "\\src\\services"
+    "\\src\\routes",
+    "\\src\\services",
+    "\\src\\utils"
   ],
   "SelectedNode": "\\.env",
   "PreviewInSolutionExplorer": false
