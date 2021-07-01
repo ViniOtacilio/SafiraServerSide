@@ -10,36 +10,25 @@ app.use(express.json());
 app.use(cors());
 const session = require("express-session");
 const initializePassport = require("./utils/passportConfig.js");
-
+const FileStore = require('session-file-store')(session);
 app.use(express.json());
-
-app.get("/", (request, response) => {
-  return response.json({ message: "Server is up" });
-});
-
-app.use("/api", routes);
 
 //LOGIN
 initializePassport(passport);
 
+app.use(
+    session({
+        store: new FileStore,
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 app.post("/users/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
@@ -49,11 +38,22 @@ app.post("/users/login", function (req, res, next) {
     if (!user) {
     //   return res.json({ message: info.message });
     return res.sendStatus(500);
-    }
-    res.json({ message: "Usuario logado:" + user.username });
+      }
+      req.login(user, function (error) {
+          if (error) return next(error);
+          console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
+          //req.session.user = req.user;
+      });
+      res.redirect("/")
   })(req, res, next);
 });
+
 //LOGIN
+app.use("/api", routes);
+
+app.get("/", (req, res) => {
+    return res.json({ message: "Server is up " + req.isAuthenticated()});
+});
 
 app.listen(3333);
 

@@ -1,4 +1,3 @@
-//const { registerService } = require('../services/registerService');
 
 const { createNewUser } = require('../services/registerService');
 
