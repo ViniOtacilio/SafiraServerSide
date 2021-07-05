@@ -4,13 +4,15 @@ const express = require("express");
 const app = express();
 const routes = require("./routes/router");
 var cors = require("cors");
+const session = require("express-session");
+const initializePassport = require("./utils/passportConfig.js");
+const FileStore = require('session-file-store')(session);
+
 cors({ credentials: true, origin: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-const session = require("express-session");
-const initializePassport = require("./utils/passportConfig.js");
-const FileStore = require('session-file-store')(session);
+
 app.use(express.json());
 
 //LOGIN
@@ -32,13 +34,14 @@ app.use(passport.session());
 
 app.post("/users/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
+    // console.log(req);
     if (err) {
       return next(err);
     }
     if (!user) {
     //   return res.json({ message: info.message });
     return res.sendStatus(500);
-      }
+    }
       req.login(user, function (error) {
           if (error) return next(error);
           console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
