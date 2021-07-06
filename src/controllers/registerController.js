@@ -3,10 +3,10 @@ const { createSaldo } = require('./saldoController');
 const { createNewUser } = require('../services/registerService');
 
 const createUser =  (req, res, next) => {
-    const { name, email, password, passwordRepeated } = req.body;
+    const { name, email, password, Repeatedpassword } = req.body;
 
     try {
-        createNewUser(name, email, password, passwordRepeated);
+        createNewUser(name, email, password, Repeatedpassword);
         setTimeout(function () {
             passport.authenticate("local", function (err, user, info) {
                 if (err) {
