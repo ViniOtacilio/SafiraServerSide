@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const registerNewUserQuery = require("../model/registerUserQuery");
 
-const createNewUser = async (name, email, password, Repeatedpassword) => {
+const createNewUser = async (name, email, password, repeatedPassword) => {
   let errors = [];
 
-    if (!name || !email || !password || !Repeatedpassword) {
+    if (!name || !email || !password || !repeatedPassword) {
     errors.push({ message: "Por favor preencha todos os campos!" });
   }
 
@@ -12,7 +12,7 @@ const createNewUser = async (name, email, password, Repeatedpassword) => {
     errors.push({ message: "Sua senha deve ser maior que 6 caracteres." });
   }
 
-  if (password != passwordRepeated) {
+  if (password != repeatedPassword) {
     errors.push({ message: "A senha repetida está incorreta." });
   }
 
