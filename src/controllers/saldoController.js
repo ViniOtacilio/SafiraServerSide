@@ -13,12 +13,11 @@ const createSaldo = async (userid) => {
 }
 
 const changeSaldo = async (userid, tipo_de_transacao, value) => {
-    console.log("entrou na changeSaldo");
     try {
         await changeSaldoService(userid, tipo_de_transacao, value);
     }
     catch (e) {
-        console.log("Saldo nao criado: " + e);
+        console.log("Saldo nao alterado: " + e);
     }
 
 }
