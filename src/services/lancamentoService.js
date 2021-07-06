@@ -1,4 +1,5 @@
 const registerNewLancamentoQuery = require("../model/lancamentoUserQuery");
+const { changeSaldo } = require("../controllers/saldoController");
 
 const createNewLancamento = async (
   value,
@@ -11,7 +12,7 @@ const createNewLancamento = async (
   let errors = [];
 
   if (!value || !tipo_de_transacao || !categoriaid || !titulo_lancamento) {
-    errors.push({ message: "Por favor preencha todos os campos!" });
+    errors.push({ message: "Por favor preencha todos os campos obrigatórios!" });
   }
 
   if (errors.length > 0) {
@@ -25,7 +26,13 @@ const createNewLancamento = async (
       categoriaid,
       titulo_lancamento,
       data_lancamento
-    );
+      );
+
+      console.log("lancamento criado");
+
+      changeSaldo(userid, tipo_de_transacao, value);
+
+      console.log("saiu do change saldo");
   }
 };
 

@@ -1,6 +1,8 @@
 const { pool } = require("../database.js");
 
-const registerNewUser = async (name, email, hashedPassword) => {
+const registerNewUser = (name, email, hashedPassword) => {
+
+    
   // Checa se há um usuário com o mesmo email
   pool.query(
     `SELECT * FROM users
@@ -26,7 +28,7 @@ const registerNewUser = async (name, email, hashedPassword) => {
               throw err;
             }
           }
-        );
+          );
       }
     }
   );
