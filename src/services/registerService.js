@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const registerNewUserQuery = require("../model/registerUserQuery");
 
-const createNewUser = async (name, email, password, passwordRepeated) => {
+const createNewUser = async (name, email, password, Repeatedpassword) => {
   let errors = [];
 
-  if (!name || !email || !password || !passwordRepeated) {
+    if (!name || !email || !password || !Repeatedpassword) {
     errors.push({ message: "Por favor preencha todos os campos!" });
   }
 
