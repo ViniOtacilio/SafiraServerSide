@@ -31,8 +31,6 @@ const createNewLancamento = async (
       console.log("lancamento criado");
 
       changeSaldo(userid, tipo_de_transacao, value);
-
-      console.log("saiu do change saldo");
   }
 };
 
