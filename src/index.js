@@ -19,7 +19,8 @@ initializePassport(passport);
 app.use(
     session({
         store: new FileStore,
-        secret: process.env.SESSION_SECRET,
+        //CHANGE TO env
+        secret: 'secret',
         resave: false,
         saveUninitialized: false,
     })
