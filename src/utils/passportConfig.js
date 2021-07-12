@@ -3,7 +3,8 @@ const { pool } = require("../database.js");
 const bcrypt = require("bcrypt");
 
 function initialize(passport) {
-  const authenticateUser = (email, password, done) => {
+    const authenticateUser = (email, password, done) => {
+        console.log("email:" + email);
     pool.query(
       `SELECT * FROM users WHERE email= $1`,
       [email],
@@ -30,7 +31,7 @@ function initialize(passport) {
         }
         else {
             console.log("Usuário não encontrado");
-            return done(null, false, { message: "Usuário não encontrado" });
+            //return done(null, false, { message: "Usuário não encontrado" });
         }
       }
     );
@@ -46,10 +47,8 @@ function initialize(passport) {
     )
   );
 
-    passport.serializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) => done(null, user));
 
-
- 
   passport.deserializeUser((id, done) => {
     console.log(id['user_id'])
       pool.query(

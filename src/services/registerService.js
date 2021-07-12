@@ -1,58 +1,30 @@
-const { pool } = require('../database.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const registerNewUserQuery = require("../model/registerUserQuery");
 
-const createNewUser = async (name, email, password, passwordRepeated) => {
+const createNewUser = async (name, email, password, repeatedPassword) => {
+  let errors = [];
 
-    let errors = [];
-  
-    if (!name || !email || !password || !passwordRepeated) {
-      errors.push({ message: "Por favor preencha todos os campos!" });
-    }
-  
-    if (password.length < 6) {
-      errors.push({ message: "Sua senha deve ser maior que 6 caracteres." });
-    }
-  
-    if (password != passwordRepeated) {
-      errors.push({ message: "A senha repetida está incorreta." });
-    }
-  
-    if (errors.length > 0) {
-      throw errors;
-    } else {
-      let hashedPassword = await bcrypt.hash(password,10);
-      
+    if (!name || !email || !password || !repeatedPassword) {
+    errors.push({ message: "Por favor preencha todos os campos!" });
+  }
 
-      // Checa se há um usuário com o mesmo email
-      pool.query(
-        `SELECT * FROM users
-        WHERE email = $1`,[email], (error,results) => {
-          if(error){
-            throw error;
-          }
-          if(results.rows.length > 0) {
-            errors.push({message: "Email já existente"});
-            throw errors;
-          }
-          // Se estiver tudo certo cria a conta do usuário
-          else {
-            pool.query(
-              `INSERT INTO users (username, email, password, date_created)
-               VALUES ($1, $2, $3, current_timestamp)
-               RETURNING user_id, password`, [name, email, hashedPassword], (err, result) => {
-                if (err) {
-                  throw err
-                }
-               }
-            )
-          }
+  if (password.length < 6) {
+    errors.push({ message: "Sua senha deve ser maior que 6 caracteres." });
+  }
 
+  if (password != repeatedPassword) {
+    errors.push({ message: "A senha repetida está incorreta." });
+  }
 
-        }
-      )
-    }
-}
+  if (errors.length > 0) {
+    throw errors;
+  } else {
+    let hashedPassword = await bcrypt.hash(password, 10);
+    // Criando usuário no banco
+    registerNewUserQuery.registerNewUser(name, email, hashedPassword);
+  }
+};
 
 module.exports = {
-    createNewUser
-}
+  createNewUser,
+};

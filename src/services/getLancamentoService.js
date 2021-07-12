@@ -1,47 +1,39 @@
 const { pool } = require('../database.js');
+const { getLancamentoQuery } = require('../model/getLancamentoQuery');
 
-const getLancamentoByUser = async (user_id, lanc_id, lanc_status, lanc_category, start_date, end_date) => {
+const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date) => {
    
-    console.log("Dentro do service de getlancamento:" + user_id + "-" + lanc_id + "-" + lanc_status + "-" + lanc_category + "-" + start_date + "-" + end_date);
+    console.log("Dentro do service de getlancamento:" + user_id + "-" + id + "-" + status + "-" + titulo + "-" + start_date + "-" + end_date);
 
     let errors = [];
 
     var base_query = 'SELECT * FROM lancamentos WHERE userid IN ('+user_id+')';
     console.log(base_query);
-    
-    console.log(lanc_id);
 
     if (!user_id) {
-        errors.push({ message: "Sem id de usuário" });
+        errors.push( "Sem id de usuário" );
     }
 
     if (errors.length > 0) {
         throw errors;
     } else {
-        if (typeof lanc_id !== 'undefined' && lanc_id){
-            base_query = base_query + ' AND lanc_id IN ('+lanc_id+')';
+        if (typeof id !== 'undefined' && id){
+            base_query = base_query + ' AND id IN ('+id+')';
             console.log(base_query);
         } 
-        if (typeof lanc_status !== 'undefined' && lanc_status){
-            let status = [];
-            value = lanc_status.split(',');
+        if (typeof status !== 'undefined' && status ){
+            if(status!='0' && status!='1' && status != '0,1'){
+                errors.push({ message: "Tipo de  Transação inválido" });
+                throw errors;
+            }
+            let values = [];
+            value = status.split(',');
             for(idx in value){
                 str = "'"+value[idx]+"'";
                 console.log(str);
-                status.push(str);
+                values.push(str);
             }
-            base_query = base_query + " AND lanc_status IN ("+status.join(",")+")";
-            console.log(base_query);
-        }
-        if (typeof lanc_category !== 'undefined' && lanc_category){
-            let category = [];
-            value = lanc_category.split(',');
-            for(idx in value){
-                str = "'"+value[idx]+"'";
-                console.log(str);
-                category.push(str);
-            }
-            base_query = base_query + ' AND lanc_category IN ('+category.join(",")+')';
+            base_query = base_query + " AND tipo_de_transacao IN ("+values+")";
             console.log(base_query);
         }
         if (typeof start_date !== 'undefined' && start_date){
@@ -62,7 +54,7 @@ const getLancamentoByUser = async (user_id, lanc_id, lanc_status, lanc_category,
                 throw errors;
             }
 
-            base_query = base_query + ' AND date > '+start_date;
+            base_query = base_query + " AND date_trunc('day', data_lancamento) >= TO_DATE('"+start_date+"', 'YYYY-MM-DD')";
             console.log(base_query);
         }
         if (typeof end_date !== 'undefined' && end_date){
@@ -83,21 +75,32 @@ const getLancamentoByUser = async (user_id, lanc_id, lanc_status, lanc_category,
                 throw errors;
             }
 
-            base_query = base_query + ' AND date < '+end_date;
+            base_query = base_query + " AND date_trunc('day', data_lancamento) <= TO_DATE('"+end_date+"', 'YYYY-MM-DD')";
             console.log(base_query);
         }
-        
-        pool.query(
-          base_query, (err, result) => {
-                if (err) {
-                throw err     
+        if (typeof titulo !== 'undefined' && titulo){
+            let titulos = [];
+            value = titulo.split(',');
+            for(idx in value){
+                str = "'"+value[idx]+"'";
+                console.log(str);
+                titulos.push(str);
             }
-            return result
-            }
-        )
-    }
+            base_query = base_query + " AND titulo_lancamento IN ("+titulos.join(",")+")";
+            console.log(base_query);
+        }
+
+        console.log('final query: '+ base_query);
+
+        data = await getLancamentoQuery( base_query );
+        console.log('outside return func : ');
+        console.log(data);
+
+        return data ;
+
+    }    
 }
 
-    module.exports = {
-        getLancamentoByUser
-    }
+module.exports = {
+      getLancamentoByUser
+}
