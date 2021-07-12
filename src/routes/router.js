@@ -1,7 +1,7 @@
 const express = require('express');
 const { createUser } = require('../controllers/registerController');
 const { createLancamento } = require('../controllers/lancamentoController');
-const { getLancamento } = require('../controllers/getlancamentoController');
+const { getLancamento } = require('../controllers/lancamentoController');
 const { createSaldo } = require('../controllers/saldoController');
 
 const router = express.Router();
