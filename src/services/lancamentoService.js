@@ -8,7 +8,9 @@ const createNewLancamento = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  data_lancamento
+  data_lancamento,
+  comentario
+
 ) => {
   let errors = [];
 
@@ -26,7 +28,8 @@ const createNewLancamento = async (
       userid,
       categoriaid,
       titulo_lancamento,
-      data_lancamento
+      data_lancamento,
+      comentario
       );
 
       console.log("lancamento criado");

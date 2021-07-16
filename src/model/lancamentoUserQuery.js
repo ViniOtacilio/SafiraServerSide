@@ -6,11 +6,12 @@ const createNewLancamentoQuery = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  data_lancamento
+  data_lancamento,
+  comentario
 ) => {
   pool.query(
-    `INSERT INTO lancamentos (value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, data_lancamento, data_ultima_alteracao)
-         VALUES ($1, $2, $3, $4, $5, $6, current_timestamp)`,
+    `INSERT INTO lancamentos (value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, data_lancamento, data_ultima_alteracao,comentario)
+         VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, $7)`,
     [
       value,
       tipo_de_transacao,
@@ -18,6 +19,7 @@ const createNewLancamentoQuery = async (
       categoriaid,
       titulo_lancamento,
       data_lancamento,
+      comentario
     ],
     (err, result) => {
       if (err) {
