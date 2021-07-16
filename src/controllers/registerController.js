@@ -13,7 +13,6 @@ const createUser =  (req, res, next) => {
                     return next(err);
                 }
                 if (!user) {
-                    console.log(user);
                     return res.sendStatus(500);
                 }
                 req.login(user, function (error) {

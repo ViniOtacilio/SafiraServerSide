@@ -42,6 +42,7 @@ app.post("/users/login", function (req, res, next) {
     }
       req.login(user, function (error) {
           if (error) return next(error);
+          console.log(req.headers.cookie);
           console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
       });
       res.redirect("/")
