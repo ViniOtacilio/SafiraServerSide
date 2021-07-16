@@ -8,7 +8,6 @@ const createNewLancamento = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  data_lancamento,
   comentario
 
 ) => {
@@ -28,7 +27,6 @@ const createNewLancamento = async (
       userid,
       categoriaid,
       titulo_lancamento,
-      data_lancamento,
       comentario
       );
 
