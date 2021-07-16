@@ -1,7 +1,7 @@
 const { pool } = require("../database.js");
 
 const getCategoriaQuery = async () => {
-    let teste;
+    let cloneArray;
     pool.query(
     `SELECT * FROM categoria`,
     (err, result) => {
@@ -9,14 +9,12 @@ const getCategoriaQuery = async () => {
         throw err;
       }
       else {
-        console.log(result.rows);
+      cloneArray = JSON.parse(JSON.stringify(result.rows));
+      return cloneArray;
     }
-    //   console.log(result);
-    //   console.log(err);
+
     }
   );
-  console.log(teste);
-  return teste;
 };
 
 module.exports = {
