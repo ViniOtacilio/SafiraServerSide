@@ -22,7 +22,7 @@ initializePassport(passport);
 app.use(
     session({
         store: new FileStore,
-        secret: process.env.SESSION_SECRET,
+        secret: process.env.SESSION_SECRET ,
         resave: false,
         saveUninitialized: false,
     })
