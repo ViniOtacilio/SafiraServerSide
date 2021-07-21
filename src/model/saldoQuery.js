@@ -59,7 +59,29 @@ const changeSaldo = (userid, tipo_de_transacao, value) => {
     
 }
 
+const getSaldo = (userid, callback) => {
+    let cloneSaldo;
+
+    return new Promise(function (resolve, reject) {
+    
+        pool.query(
+            `SELECT value FROM saldo 
+            WHERE userid = $1`,
+            [userid],
+            (err, result) => {
+            if (err) {
+                throw (err);
+            }
+                console.log("aaaah"+result.rows);
+                resolve(result.rows);
+        })
+
+    })  
+
+}
+
 module.exports = {
     createNewSaldo,
-    changeSaldo
+    changeSaldo,
+    getSaldo
 };
