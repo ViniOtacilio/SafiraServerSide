@@ -14,7 +14,10 @@ const createUser =  (req, res, next) => {
             }
             req.login(user, function (error) {
                 if (error) return next(error);
-                console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id);
+                res.status(200).json({userId: req.user.user_id, userName: req.user.username});
+                console.log(req.user);
+              //   console.log(req.headers.cookie);
+              //   console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
             });
             // res.redirect('/');
             createSaldo(req.user.user_id);
