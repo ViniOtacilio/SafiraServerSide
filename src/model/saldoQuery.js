@@ -60,7 +60,6 @@ const changeSaldo = (userid, tipo_de_transacao, value) => {
 }
 
 const getSaldo = (userid, callback) => {
-    let cloneSaldo;
 
     return new Promise(function (resolve, reject) {
     
@@ -72,7 +71,7 @@ const getSaldo = (userid, callback) => {
             if (err) {
                 throw (err);
             }
-                console.log("aaaah"+result.rows);
+                console.log(result.rows[0]);
                 resolve(result.rows);
         })
 

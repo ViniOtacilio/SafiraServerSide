@@ -25,11 +25,10 @@ const changeSaldo = async (userid, tipo_de_transacao, value) => {
 
 const getSaldo = async (req, res, next) => {
 
-    let userid = req.user.user_id;
+    const { userid } = req.body;
 
     try {
         saldoF = await getSaldoService(userid)
-        console.log("controller:" + saldoF);
         res.send(saldoF);
         next();
     } 
