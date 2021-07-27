@@ -59,14 +59,14 @@ const changeSaldo = (userid, tipo_de_transacao, value) => {
     
 }
 
-const getSaldo = (userid, callback) => {
+const getSaldo = (user_id, callback) => {
 
     return new Promise(function (resolve, reject) {
     
         pool.query(
             `SELECT value FROM saldo 
             WHERE userid = $1`,
-            [userid],
+            [user_id],
             (err, result) => {
             if (err) {
                 throw (err);

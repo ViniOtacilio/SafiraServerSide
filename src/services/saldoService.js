@@ -32,18 +32,18 @@ const changeSaldoService = async (userid, tipo_de_transacao, value) => {
 
 }
 
-const getSaldoService = async (userid) => {
+const getSaldoService = async (user_id) => {
     let errors = [];
   
 
-    if (!userid) {
+    if (!user_id) {
         errors.push({ message: "Saldo nao encontrado" });
     }
 
     if (errors.length > 0) {
         throw errors;
     } else {
-        saldo = await getSaldoQuery.getSaldo(userid);
+        saldo = await getSaldoQuery.getSaldo(user_id);
         return saldo;
     }
 }
