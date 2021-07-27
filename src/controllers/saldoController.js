@@ -25,10 +25,10 @@ const changeSaldo = async (userid, tipo_de_transacao, value) => {
 
 const getSaldo = async (req, res, next) => {
 
-    const { userid } = req.body;
+    const user_id = req.query.user_id;
 
     try {
-        saldoF = await getSaldoService(userid)
+        saldoF = await getSaldoService(user_id)
         res.send(saldoF);
         next();
     } 
