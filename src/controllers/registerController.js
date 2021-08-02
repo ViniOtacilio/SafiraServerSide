@@ -16,18 +16,20 @@ const createUser =  (req, res, next) => {
                 if (error) return next(error);
                 res.status(200).json({userId: req.user.user_id, userName: req.user.username});
                 console.log(req.user);
-              //   console.log(req.headers.cookie);
-              //   console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
+
             });
-            // res.redirect('/');
             createSaldo(req.user.user_id);
         })(req, res, next);
-    }, 3000);
+    }, 5000);
 
     try {
+        console.log(name,email,password,repeatedPassword);
+        // createNewUser(name, email, password, repeatedPassword).then(loginUser);
         createNewUser(name, email, password, repeatedPassword).then(loginUser);
+
     }
     catch(e) {
+        console.log(e);
         res.sendStatus(500);
     }
 }

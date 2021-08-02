@@ -24,7 +24,7 @@ const getLancamento = async (req, res, next) => {
     const start_date = req.query.start_date;
     const end_date = req.query.end_date;
 
-    console.log("Dentro do Controller de getlancamento:" + user_id + "-" + id + "-" + status +  "-" + titulo + "-" + start_date + "-" + end_date);
+    // console.log("Dentro do Controller de getlancamento:" + user_id + "-" + id + "-" + status +  "-" + titulo + "-" + start_date + "-" + end_date);
 
     try {
         result = await getLancamentoByUser( user_id, id, status, titulo, start_date, end_date)

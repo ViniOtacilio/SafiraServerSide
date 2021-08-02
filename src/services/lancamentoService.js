@@ -28,11 +28,11 @@ const createNewLancamento = async (
       categoriaid,
       titulo_lancamento,
       comentario
-      );
+      ).then(changeSaldo(userid, tipo_de_transacao, value));
 
       console.log("lancamento criado");
 
-      changeSaldo(userid, tipo_de_transacao, value);
+    //   changeSaldo(userid, tipo_de_transacao, value);
   }
 };
 
