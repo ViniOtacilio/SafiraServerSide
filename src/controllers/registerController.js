@@ -3,6 +3,20 @@ const { createSaldo } = require('./saldoController');
 const { createNewUser } = require('../services/registerService');
 
 const createUser =  (req, res, next) => {
+    // #swagger.start
+    
+     /*
+         #swagger.path = '/forcedEndpoint/{id}'
+         #swagger.method = 'put'
+         #swagger.description = 'Forced endpoint.'
+         #swagger.produces = ['application/json']
+     */
+     
+     /*  #swagger.parameters['id'] = {
+             in: 'path',
+             type: 'integer',
+             description: 'User ID.' } */
+    // #swagger.end
     const { name, email, password, repeatedPassword } = req.body;
     let loginUser =  setTimeout(function () {
         passport.authenticate("local", function (err, user, info) {

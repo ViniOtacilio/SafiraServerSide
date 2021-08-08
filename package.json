@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node.index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "swagger-autogen": "node swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^8.6.0",
-    "session-file-store": "^1.5.0"
+    "session-file-store": "^1.5.0",
+    "swagger-autogen": "^2.11.1",
+    "swagger-ui-express": "^4.1.6"
   }
 }

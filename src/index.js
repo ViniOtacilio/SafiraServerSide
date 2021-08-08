@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const routes = require("./routes/router");
 var cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./openApiDocumentation/openApiDocumentation');
 
 const passport = require("passport");
 const session = require("express-session");
@@ -70,6 +72,7 @@ app.use("/api", routes);
 app.get("/", (req, res) => {
     return res.json({ message: "Server is up " + req.isAuthenticated()});
 });
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
 app.listen(3333);
 
