@@ -24,7 +24,7 @@ function initialize(passport) {
             if (isMatch) {
               return done(null, user);
             } else {
-                console.log("A senha não está correta");
+                console.log("A senha não está correta" + user.password);
                 return done(null, false, { message: "A senha não está correta" });
             }
           });
