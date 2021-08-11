@@ -110,7 +110,7 @@ function sendEmail(user, token) {
         to: user.email,
         from: "consacretads@gmail.com", // your email
         subject: "Mudança de Senha",
-        html: `
+        html: `<p>Você requisitou uma mudança de senha, para concluir o processo clique no link abaixo:</p>
      <a href="http://localhost:3333/api/users/resetPassword/${token}">Mudar Senha</a>
    `
     };
