@@ -164,6 +164,96 @@ module.exports = {
         }
       },
     },
+    '/users/novoLancamento': {
+      post: {
+        tags: ['GeneralApi'],
+        description: 'Cria novo lançamento',
+        operationId: 'novoLancamento',
+        parameters: [
+          {
+            name: 'lancamento_value',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/lancamento_value'
+            },
+            required: true,
+            description: 'Valor da transação'
+          },
+          {
+            name: 'tipo_de_transacao',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tipo_de_transacao'
+            },
+            required: true,
+            description: 'Tipo de transação(Entrada ou saida)'
+          },
+          {
+            name: 'user_id',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/user_id'
+            },
+            required: true,
+            description: 'Id do usuário'
+          },
+          {
+            name: 'categoriaid',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/categoriaId'
+            },
+            required: true,
+            description: 'Id da categoria'
+          },
+          {
+            name: 'titulo_lancamento',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tituloLancamento'
+            },
+            required: true,
+            description: 'Titulo do lançamento'
+          },
+          {
+            name: 'comentario',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/comentario'
+            },
+            required: true,
+            description: 'Comentários sobre o lançamento'
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Lancamento criado com sucesso',
+            content: { 
+              'application/json': {
+                // schema: {
+                //   $ref: '#components/schemas/categorias'
+                // },
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
+    },
     '/users/saldo': {
       get: {
         tags: ['GeneralApi'],
@@ -260,96 +350,6 @@ module.exports = {
         }
       },
     },
-    '/users/novoLancamento': {
-      post: {
-        tags: ['GeneralApi'],
-        description: 'Cria novo lançamento',
-        operationId: 'novoLancamento',
-        parameters: [
-          {
-            name: 'lancamento_value',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/lancamento_value'
-            },
-            required: true,
-            description: 'Valor da transação'
-          },
-          {
-            name: 'tipo_de_transacao',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/tipo_de_transacao'
-            },
-            required: true,
-            description: 'Tipo de transação(Entrada ou saida)'
-          },
-          {
-            name: 'user_id',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/user_id'
-            },
-            required: true,
-            description: 'Id do usuário'
-          },
-          {
-            name: 'categoriaid',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/categoriaId'
-            },
-            required: true,
-            description: 'Id da categoria'
-          },
-          {
-            name: 'titulo_lancamento',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/tituloLancamento'
-            },
-            required: true,
-            description: 'Titulo do lançamento'
-          },
-          {
-            name: 'comentario',
-            in: 'body',
-            schema: {
-              $ref: '#/components/schemas/comentario'
-            },
-            required: true,
-            description: 'Comentários sobre o lançamento'
-          },
-        ],
-        responses: {
-          '200': {
-            description: 'Lancamento criado com sucesso',
-            content: { 
-              'application/json': {
-                // schema: {
-                //   $ref: '#components/schemas/categorias'
-                // },
-            }
-           
-            }
-          },
-          '500': {
-            description: 'Erro no servidor',
-            content: {
-              'application/json': {
-                schema: {
-                  $ref: '#/components/schemas/Error'
-                },
-                example: {
-                  message: 'Erro no servidor',
-                  internal_code: '500'
-                }
-              }
-            }
-          }
-        }
-      },
-    },
     '/users/lancamento': {
       get: {
         tags: ['GeneralApi'],
@@ -413,12 +413,20 @@ module.exports = {
         ],
         responses: {
           '200': {
-            description: 'Lancamento criado com sucesso',
+            description: 'Lancamento retornado com sucesso',
             content: { 
               'application/json': {
-                // schema: {
-                //   $ref: '#components/schemas/categorias'
-                // },
+                schema: {
+                  $ref: '#components/schemas/lancamentoReturn'
+                },
+                example: {
+                  user_id: 33,
+                  id: 1,
+                  tipo_de_transacao: 1,
+                  tituloLancamento: 'Mercado',
+                  start_date: '20/02/2021',
+                  end_date: '25/02/2021'
+                }
             }
            
             }
@@ -562,6 +570,44 @@ module.exports = {
       type: 'string',
       description: 'Comentário sobre o lançamento',
       example: 'Divída com Marcelo'
+    },
+    id_transacao: {
+      type: 'integer',
+      description: 'Id de uma transação',
+      example: 1
+    },
+    start_date: {
+      type: 'string',
+      description: 'Data inicial para fins de filtragem',
+      example: '20/02/2021'
+    },
+    end_date: {
+      type: 'string',
+      description: 'Data final para fins de filtragem',
+      example: '25/02/2021'
+    },
+    lancamentoReturn: {
+      type: 'object',
+      properties: {
+        user_id: {
+          type: 'string'
+        },
+        id: {
+          type: 'integer'
+        },
+        tipo_de_transacao: {
+          type: 'integer'
+        },
+        tituloLancamento: {
+          type: 'string'
+        },
+        start_date: {
+          type: 'string'
+        },
+        end_date: {
+          type: 'string'
+        }
+      }
     },
   }
 }}

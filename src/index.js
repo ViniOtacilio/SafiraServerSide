@@ -49,7 +49,7 @@ app.post("/users/login", function (req, res, next) {
         //   console.log(req.headers.cookie);
         //   console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
       });
-    //   res.redirect("/")
+     // res.redirect("/")
   })(req, res, next);
 });
 

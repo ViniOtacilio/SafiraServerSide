@@ -36,7 +36,7 @@ const createNewLancamento = async (
   }
 };
 
-const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date) => {
+const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id) => {
    
   console.log("Dentro do service de getlancamento:" + user_id + "-" + id + "-" + status + "-" + titulo + "-" + start_date + "-" + end_date);
 
@@ -124,6 +124,29 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
           base_query = base_query + " AND titulo_lancamento IN ("+titulos.join(",")+")";
           console.log(base_query);
       }
+      if (typeof categoria_id !== 'undefined' && categoria_id){
+        let categorias = [];
+        value = categoria_id.split(',');
+        for(idx in value){
+            console.log(value[idx])
+
+            if (!isNaN(parseInt(value[idx]))){
+                console.log('is int')
+             }
+             else{
+                 console.log(parseInt(value[idx]));
+                 errors.push({ message: "Id de categoria Inválido" });
+                 throw errors;
+             }
+
+            str = "'"+value[idx]+"'";
+            console.log(str);
+            categorias.push(str);
+        }
+       
+        base_query = base_query + " AND categoriaid IN ("+categorias.join(",")+")";
+        console.log(base_query);
+    }
 
       console.log('final query: '+ base_query);
 
