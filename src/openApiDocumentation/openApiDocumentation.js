@@ -254,6 +254,51 @@ module.exports = {
         }
       },
     },
+    '/users/forgotPassword': {
+      post: {
+        tags: ['GeneralApi'],
+        description: 'Recuperar senha',
+        operationId: 'novaSenha',
+        parameters: [
+          {
+            name: 'email',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/email'
+            },
+            required: true,
+            description: 'viniotacilio@gmail.com'
+          }
+        ],
+        responses: {
+          '200': {
+            description: 'Email enviado com sucesso',
+            content: { 
+              'application/json': {
+                // schema: {
+                //   $ref: '#components/schemas/categorias'
+                // },
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
+    },
     '/users/saldo': {
       get: {
         tags: ['GeneralApi'],
