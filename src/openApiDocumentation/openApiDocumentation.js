@@ -3,11 +3,11 @@ module.exports = {
   openapi: '3.0.1',
   info: {
     version: '1.0.0',
-    title: 'Users',
-    description: 'User management API',
-    termsOfService: 'http://api_url/terms/',
+    title: 'Api',
+    description: 'Safira API',
+    // termsOfService: 'http://api_url/terms/',
     contact: {
-      name: 'Wolox Team',
+      name: 'Safira Team',
       email: 'hello@wolox.co',
       url: 'https://www.wolox.com.ar/'
     },
@@ -18,7 +18,7 @@ module.exports = {
   },
   servers: [
     {
-      url: 'http://localhost:3000/',
+      url: 'http://localhost:3333/',
       description: 'Local server'
     },
     {
@@ -37,111 +37,432 @@ module.exports = {
   ],
   tags: [
     {
-      name: 'CRUD operations'
+      name: 'GeneralApi'
     }
   ],
   paths: {
-    '/users': {
-      get: {
-        tags: ['CRUD operations'],
-        description: 'Get users',
-        operationId: 'getUsers',
+    '/users/register': {
+      post: {
+        tags: ['GeneralApi'],
+        description: 'Create users',
+        operationId: 'createUsers',
         parameters: [
           {
-            name: 'x-company-id',
-            in: 'header',
+            name: 'name',
+            in: 'body',
             schema: {
-              $ref: '#/components/schemas/companyId'
+              $ref: '#/components/schemas/name'
             },
             required: true,
-            description: 'Company id where the users work'
+            description: 'Nome do usuário'
           },
           {
-            name: 'page',
-            in: 'query',
+            name: 'email',
+            in: 'body',
             schema: {
-              type: 'integer',
-              default: 1
+              $ref: '#/components/schemas/email'
             },
-            required: false
+            required: true,
+            description: 'Email do usuário'
           },
           {
-            name: 'orderBy',
-            in: 'query',
+            name: 'password',
+            in: 'body',
             schema: {
-              type: 'string',
-              enum: ['asc', 'desc'],
-              default: 'asc'
+              $ref: '#/components/schemas/password'
             },
-            required: false
+            required: true,
+            description: 'Senha do usuário'
+          },
+          {
+            name: 'repeatedPassword',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/repeatedPassword'
+            },
+            required: true,
+            description: 'Senha do usuário novamente'
           }
         ],
         responses: {
           '200': {
-            description: 'Users were obtained',
-            content: {
-              'application/json': {
-                schema: {
-                  $ref: '#/components/schemas/Users'
-                }
-              }
+            description: 'Usuário criado',
+            content: { 'application/json': {
+              default:'nada'
+            }
             }
           },
-          '400': {
-            description: 'Missing parameters',
+          '500': {
+            description: 'Erro no servidor',
             content: {
               'application/json': {
                 schema: {
                   $ref: '#/components/schemas/Error'
                 },
                 example: {
-                  message: 'companyId is missing',
-                  internal_code: 'missing_parameters'
+                  message: 'Erro no servidor',
+                  internal_code: '500'
                 }
               }
             }
           }
         }
       },
+    },
+    '/users/login': {
       post: {
-        tags: ['CRUD operations'],
-        description: 'Create users',
-        operationId: 'createUsers',
-        parameters: [],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                $ref: '#/components/schemas/Users'
-              }
-            }
+        tags: ['GeneralApi'],
+        description: 'Login user',
+        operationId: 'loginUsers',
+        parameters: [
+          {
+            name: 'email',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/email'
+            },
+            required: true,
+            description: 'Email do usuário'
           },
-          required: true
-        },
+          {
+            name: 'password',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/password'
+            },
+            required: true,
+            description: 'Senha do usuário'
+          }
+        ],
         responses: {
           '200': {
-            description: 'New users were created'
+            description: 'Usuário logado',
+            content: { 'application/json': {
+              default:'nada'
+            }
+              // 'application/json': {
+              //   schema: {
+              //     $ref: '#/components/schemas/Users'
+              //   }
+              // }
+            }
           },
-          '400': {
-            description: 'Invalid parameters',
+          '500': {
+            description: 'Erro no servidor',
             content: {
               'application/json': {
                 schema: {
                   $ref: '#/components/schemas/Error'
                 },
                 example: {
-                  message: 'User identificationNumbers 10, 20 already exist',
-                  internal_code: 'invalid_parameters'
+                  message: 'Erro no servidor',
+                  internal_code: '500'
                 }
               }
             }
           }
         }
-      }
+      },
+    },
+    '/users/saldo': {
+      get: {
+        tags: ['GeneralApi'],
+        description: 'Retorna saldo',
+        operationId: 'saldoUsers',
+        parameters: [
+          {
+            name: 'user_id',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/user_id'
+            },
+            required: true,
+            description: 'ID do usuário'
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Saldo retornado',
+            content: { 
+              'application/json': {
+                schema: {
+                  $ref: '#components/schemas/returnSaldo'
+                },
+                example: {
+                  message: '45,50'
+                }
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
+    },
+    '/categorias': {
+      get: {
+        tags: ['GeneralApi'],
+        description: 'Retorna todas as categorias',
+        operationId: 'categoria',
+        parameters: [
+          // {
+          //   name: 'user_id',
+          //   in: 'body',
+          //   schema: {
+          //     $ref: '#/components/schemas/user_id'
+          //   },
+          //   required: true,
+          //   description: 'ID do usuário'
+          // },
+        ],
+        responses: {
+          '200': {
+            description: 'Todas as categorias',
+            content: { 
+              'application/json': {
+                schema: {
+                  $ref: '#components/schemas/categorias'
+                },
+                example: {
+                  message: [{'Moradia': 1, 'Supermercado': 2}]
+                }
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
+    },
+    '/users/novoLancamento': {
+      post: {
+        tags: ['GeneralApi'],
+        description: 'Cria novo lançamento',
+        operationId: 'novoLancamento',
+        parameters: [
+          {
+            name: 'lancamento_value',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/lancamento_value'
+            },
+            required: true,
+            description: 'Valor da transação'
+          },
+          {
+            name: 'tipo_de_transacao',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tipo_de_transacao'
+            },
+            required: true,
+            description: 'Tipo de transação(Entrada ou saida)'
+          },
+          {
+            name: 'user_id',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/user_id'
+            },
+            required: true,
+            description: 'Id do usuário'
+          },
+          {
+            name: 'categoriaid',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/categoriaId'
+            },
+            required: true,
+            description: 'Id da categoria'
+          },
+          {
+            name: 'titulo_lancamento',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tituloLancamento'
+            },
+            required: true,
+            description: 'Titulo do lançamento'
+          },
+          {
+            name: 'comentario',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/comentario'
+            },
+            required: true,
+            description: 'Comentários sobre o lançamento'
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Lancamento criado com sucesso',
+            content: { 
+              'application/json': {
+                // schema: {
+                //   $ref: '#components/schemas/categorias'
+                // },
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
+    },
+    '/users/lancamento': {
+      get: {
+        tags: ['GeneralApi'],
+        description: 'Recupera lançamento',
+        operationId: 'recuperarLancamento',
+        parameters: [
+          {
+            name: 'user_id',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/user_id'
+            },
+            required: true,
+            description: 'ID do usuário'
+          },
+          {
+            name: 'id_transacao',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/id_transacao'
+            },
+            required: false,
+            description: 'Id da transacao'
+          },
+          {
+            name: 'tipo_de_transacao',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tipo_de_transacao'
+            },
+            required: false,
+            description: 'Tipo de transação'
+          },
+          {
+            name: 'titulo_lancamento',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/tituloLancamento'
+            },
+            required: false,
+            description: 'Titulo do lançamento'
+          },
+          {
+            name: 'start_date',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/start_date'
+            },
+            required: false,
+            description: 'Data Inicial'
+          },
+          {
+            name: 'end_date',
+            in: 'body',
+            schema: {
+              $ref: '#/components/schemas/end_date'
+            },
+            required: false,
+            description: 'Data Final'
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Lancamento criado com sucesso',
+            content: { 
+              'application/json': {
+                // schema: {
+                //   $ref: '#components/schemas/categorias'
+                // },
+            }
+           
+            }
+          },
+          '500': {
+            description: 'Erro no servidor',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Error'
+                },
+                example: {
+                  message: 'Erro no servidor',
+                  internal_code: '500'
+                }
+              }
+            }
+          }
+        }
+      },
     }
   },
   components: {
     schemas: {
+      name: {
+        type: 'string',
+        description: 'Nome do usuário',
+        example: 'Vinicius'
+      },
+      email: {
+        type: 'string',
+        description: 'Email do usuário',
+        example: 'viniotacilio@gmail.com'
+      },
+      password: {
+        type: 'string',
+        description: 'Senha do usuário',
+        example: 'consagrados'
+      },
+      repeatedPassword: {
+        type: 'string',
+        description: 'Senha do usuário novamente',
+        example: 'consagrados'
+      },
       identificationNumber: {
         type: 'integer',
         description: 'User identification number',
@@ -166,26 +487,14 @@ module.exports = {
         properties: {
           identificationNumber: {
             $ref: '#/components/schemas/identificationNumber'
-          },
-          username: {
-            $ref: '#/components/schemas/username'
-          },
-          userType: {
-            $ref: '#/components/schemas/userType'
-          },
-          companyId: {
-            $ref: '#/components/schemas/companyId'
-          }
         }
       },
       Users: {
         type: 'object',
         properties: {
-          users: {
-            type: 'array',
-            items: {
-              $ref: '#/components/schemas/User'
-            }
+          message: {
+            type: 'string',
+            default: 'teste'
           }
         }
       },
@@ -207,6 +516,52 @@ module.exports = {
         in: 'header',
         name: 'x-api-key'
       }
-    }
+    },
+    user_id: {
+      type: 'String',
+      description: 'ID do usuário',
+      example: 133
+    },
+    returnSaldo: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string'
+        }
+      }
+    },
+    categorias: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'array'
+        }
+      }
+    },
+    lancamento_value: {
+      type: 'integer',
+      description: 'Valor do lançamentos',
+      example: '50'
+    },
+    tipo_de_transacao: {
+      type: 'integer',
+      description: 'Tipo do lançamentos',
+      example: '1'
+    },
+    categoriaId: {
+      type: 'integer',
+      description: 'Categoria do lançamentos',
+      example: '3'
+    },
+    tituloLancamento: {
+      type: 'string',
+      description: 'Titulo do lançamentos',
+      example: '50'
+    },
+    comentario: {
+      type: 'string',
+      description: 'Comentário sobre o lançamento',
+      example: 'Divída com Marcelo'
+    },
   }
-};
+}}
