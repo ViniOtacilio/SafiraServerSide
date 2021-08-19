@@ -1,6 +1,7 @@
 {
   "ExpandedNodes": [
     "",
+    "\\sessions",
     "\\src",
     "\\src\\controllers",
     "\\src\\model",
@@ -8,6 +9,6 @@
     "\\src\\services",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\utils\\passwordReset.js",
+  "SelectedNode": "\\src\\controllers\\categoriaController.js",
   "PreviewInSolutionExplorer": false
 }
