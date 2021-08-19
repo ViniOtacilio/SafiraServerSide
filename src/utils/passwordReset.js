@@ -108,9 +108,9 @@ function sendEmail(user, token) {
     console.log("dentro da função do email" + user.email);
     const msg = {
         to: user.email,
-        from: "consacretads@gmail.com", // your email
+        from: "safiranoreply@gmail.com", // your email
         subject: "Mudança de Senha",
-        html: `<p>Você requisitou uma mudança de senha, para concluir o processo clique no link abaixo:</p>
+        html: `<p>Precisa mudar sua senha? Para concluir o processo clique no link abaixo:</p>
      <a href="http://localhost:3333/api/users/resetPassword/${token}">Mudar Senha</a>
    `
     };
