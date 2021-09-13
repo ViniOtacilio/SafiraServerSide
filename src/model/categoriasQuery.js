@@ -1,5 +1,21 @@
 const { pool } = require("../database.js");
 
+const createNewCustomCategoryQuery = async (user_id, name) => {
+    pool.query(
+        `INSERT INTO categorias_customizaveis (nome, user_id)
+         values($1,$2)`,
+        [
+            name,
+            user_id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
 const getCategoriaQuery = async () => {
     let cloneArray;
     pool.query(
@@ -27,12 +43,6 @@ const getCategoriaByUserQuery = async (query) => {
               throw (err) ;
           }
           else{
-            //console.log(result.rows.length);
-           // console.log(result.rows);
-           // console.log(result.rows[0]);
-           // console.log(Object.values(result.rows[0]));
-           // console.log(result.rows[1]);
-            //console.log(Object.values(result.rows[1]));
 
             if(result.rows.length == 0){    
               console.log( 'nenhum lancamento encontrado')
@@ -67,5 +77,6 @@ const getCategoriaByUserQuery = async (query) => {
 
 module.exports = {
     getCategoriaQuery,
-    getCategoriaByUserQuery
+    getCategoriaByUserQuery,
+    createNewCustomCategoryQuery
 };

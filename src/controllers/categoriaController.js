@@ -1,5 +1,20 @@
 const { getCategories } = require('../services/categoriaService'); 
-const { getCategoriaByUser } = require('../services/categoriaService'); 
+const { getCategoriaByUser } = require('../services/categoriaService');
+const { createNewCustomCategory } = require('../services/categoriaService');
+
+const createCustomCategory = async (req, res, next) => {
+
+    const { user_id, name } = req.body;
+
+    try {
+        await createNewCustomCategory(user_id, name);
+        res.sendStatus(201);
+        next();
+    }
+    catch (e) {
+        res.sendStatus(500);
+    }
+}
 
 const getAllCategories = async(req, res, next) => {
     try {
@@ -43,5 +58,6 @@ const getCategoria = async (req, res, next) => {
 
 module.exports = {
     getAllCategories,
-    getCategoria
+    getCategoria,
+    createCustomCategory
 }
