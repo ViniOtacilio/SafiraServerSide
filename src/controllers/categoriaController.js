@@ -58,10 +58,6 @@ const getCategoria = async (req, res, next) => {
 
 module.exports = {
     getAllCategories,
-<<<<<<< HEAD
-    getCategoria
-=======
     getCategoria,
     createCustomCategory
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
 }

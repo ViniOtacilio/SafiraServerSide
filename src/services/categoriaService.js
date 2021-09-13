@@ -1,8 +1,6 @@
 const getCategoriaQuery = require("../model/categoriasQuery");
 const { getCategoriaByUserQuery } = require("../model/categoriasQuery");
 
-<<<<<<< HEAD
-=======
 
 const createNewCustomCategory = async (user_id, name) => {
 
@@ -10,7 +8,6 @@ const createNewCustomCategory = async (user_id, name) => {
 
 }
 
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
 const getCategories = async () => {
   let errors = [];
 
@@ -92,10 +89,6 @@ const getCategoriaByUser = async (user_id,  start_date, end_date) => {
 
 module.exports = {
     getCategories,
-<<<<<<< HEAD
-    getCategoriaByUser
-=======
     getCategoriaByUser,
     createNewCustomCategory
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
 };

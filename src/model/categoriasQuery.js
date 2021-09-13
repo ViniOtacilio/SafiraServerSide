@@ -43,15 +43,6 @@ const getCategoriaByUserQuery = async (query) => {
               throw (err) ;
           }
           else{
-<<<<<<< HEAD
-            //console.log(result.rows.length);
-           // console.log(result.rows);
-           // console.log(result.rows[0]);
-           // console.log(Object.values(result.rows[0]));
-           // console.log(result.rows[1]);
-            //console.log(Object.values(result.rows[1]));
-=======
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
 
             if(result.rows.length == 0){    
               console.log( 'nenhum lancamento encontrado')
@@ -86,10 +77,6 @@ const getCategoriaByUserQuery = async (query) => {
 
 module.exports = {
     getCategoriaQuery,
-<<<<<<< HEAD
-    getCategoriaByUserQuery
-=======
     getCategoriaByUserQuery,
     createNewCustomCategoryQuery
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
 };
