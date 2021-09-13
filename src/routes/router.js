@@ -8,6 +8,7 @@ const { getCategoria } = require('../controllers/categoriaController');
 const { getSaldo } = require('../controllers/saldoController');
 const { forgotPassword } = require('../utils/passwordReset');
 const { resetPassword } = require('../utils/passwordReset');
+const { createCustomCategory } = require('../controllers/categoriaController')
 
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.get('/users/categoria', getCategoria)
 router.get('/users/saldo', getSaldo);
 router.post('/users/forgotPassword', forgotPassword);
 router.post('/users/resetPassword/:token', resetPassword);
+router.post('/categorias/createCustomCategory', createCustomCategory);
 
 module.exports = router;
