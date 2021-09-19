@@ -1,9 +1,2 @@
 node_modules
 package-lock.json
-<<<<<<< HEAD
-.env"sendgrid.env" 
-"sendgrid.env" 
-=======
-.env
-sendgrid.env
->>>>>>> 16686c98d64ede86a25e71a66b86a4bbd48348b2
