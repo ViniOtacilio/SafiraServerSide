@@ -16,8 +16,8 @@ const router = express.Router();
 router.post('/users/register', createUser);
 router.post('/users/novoLancamento', createLancamento);
 router.get('/users/lancamento', getLancamento);
-router.get('/categorias', getAllCategories)
-router.get('/users/categoria', getCategoria)
+router.get('/categorias', getAllCategories);
+router.get('/users/categoria', getCategoria);
 router.get('/users/saldo', getSaldo);
 router.post('/users/forgotPassword', forgotPassword);
 router.post('/users/resetPassword/:token', resetPassword);
