@@ -4,10 +4,10 @@ const { createNewCustomCategory } = require('../services/categoriaService');
 
 const createCustomCategory = async (req, res, next) => {
 
-    const { user_id, name } = req.body;
+    const { user_id, newCategory } = req.body;
 
     try {
-        await createNewCustomCategory(user_id, name);
+        await createNewCustomCategory(user_id, newCategory);
         res.sendStatus(201);
         next();
     }

@@ -4,6 +4,7 @@ const { getCategoriaByUserQuery } = require("../model/categoriasQuery");
 
 const createNewCustomCategory = async (user_id, name) => {
 
+    console.log(user_id, name);
     getCategoriaQuery.createNewCustomCategoryQuery(user_id, name);
 
 }
