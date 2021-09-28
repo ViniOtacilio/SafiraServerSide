@@ -13,6 +13,7 @@ const createCustomCategory = async (req, res, next) => {
     }
     catch (e) {
         res.sendStatus(500);
+        console.log(e);
     }
 }
 

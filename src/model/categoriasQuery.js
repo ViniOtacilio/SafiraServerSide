@@ -2,7 +2,7 @@ const { pool } = require("../database.js");
 
 const createNewCustomCategoryQuery = async (user_id, name) => {
     pool.query(
-        `INSERT INTO categorias_customizaveis (nome, user_id)
+        `INSERT INTO categorias (nome, user_id)
          values($1,$2)`,
         [
             name,
