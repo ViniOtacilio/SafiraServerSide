@@ -37,8 +37,9 @@ app.post("/users/login", function (req, res, next) {
     if (err) {
       return next(err);
     }
-    if (!user) {
-    return res.sendStatus(500);
+      if (!user) {
+        return res.status(500).send({ success: false, error: { message: 'Houve um erro no login' } });
+        //return res.sendStatus(500);
     }
       req.login(user, function (error) {
           if (error) return next(error);

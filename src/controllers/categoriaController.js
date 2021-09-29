@@ -12,7 +12,7 @@ const createCustomCategory = async (req, res, next) => {
         next();
     }
     catch (e) {
-        res.sendStatus(500);
+        return res.status(500).send({ success: false, error: { message: 'Houve um erro no login' } });
         console.log(e);
     }
 }
