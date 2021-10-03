@@ -9,6 +9,6 @@
     "\\src\\services",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\model\\categoriasQuery.js",
+  "SelectedNode": "\\src\\controllers\\saldoController.js",
   "PreviewInSolutionExplorer": false
 }

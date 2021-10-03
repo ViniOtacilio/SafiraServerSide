@@ -3,12 +3,13 @@ const { createUser } = require('../controllers/registerController');
 const { createLancamento } = require('../controllers/lancamentoController');
 const { getLancamento } = require('../controllers/lancamentoController');
 const { createSaldo } = require('../controllers/saldoController');
-const { getAllCategories } = require('../controllers/categoriaController');
+const { getAllCategories} = require('../controllers/categoriaController');
 const { getCategoria } = require('../controllers/categoriaController');
 const { getSaldo } = require('../controllers/saldoController');
 const { forgotPassword } = require('../utils/passwordReset');
 const { resetPassword } = require('../utils/passwordReset');
-const { createCustomCategory } = require('../controllers/categoriaController')
+const { createCustomCategory } = require('../controllers/categoriaController');
+const { deleteCustomCategory } = require('../controllers/categoriaController');
 
 
 const router = express.Router();
@@ -22,5 +23,6 @@ router.get('/users/saldo', getSaldo);
 router.post('/users/forgotPassword', forgotPassword);
 router.post('/users/resetPassword/:token', resetPassword);
 router.post('/categorias/createCustomCategory', createCustomCategory);
+router.get('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
 
 module.exports = router;

@@ -8,6 +8,12 @@ const createNewCustomCategory = async (user_id, name) => {
 
 }
 
+const deleteNewCustomCategory = async (id) => {
+
+    getCategoriaQuery.deleteNewCustomCategoryQuery(id);
+
+}
+
 const getCategories = async () => {
   let errors = [];
 
@@ -90,5 +96,6 @@ const getCategoriaByUser = async (user_id,  start_date, end_date) => {
 module.exports = {
     getCategories,
     getCategoriaByUser,
-    createNewCustomCategory
+    createNewCustomCategory,
+    deleteNewCustomCategory
 };
