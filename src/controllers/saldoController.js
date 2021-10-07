@@ -33,9 +33,7 @@ const getSaldo = async (req, res, next) => {
         next();
     } 
     catch (e) {
-        res.send({
-            message: e
-        });
+        return res.status(500).send({ success: false, error: { message: e } });
         console.log("Saldo nao encontrado" + e);
     }
 }

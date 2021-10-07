@@ -2,11 +2,26 @@ const { pool } = require("../database.js");
 
 const createNewCustomCategoryQuery = async (user_id, name) => {
     pool.query(
-        `INSERT INTO categorias_customizaveis (nome, user_id)
-         values($1,$2)`,
+        `INSERT INTO categoria (nome, personalizada, user_id)
+         values($1,true,$2)`,
         [
             name,
             user_id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
+const deleteNewCustomCategoryQuery = async (id) => {
+    pool.query(
+        `DELETE FROM categoria WHERE
+         id = $1`,
+        [
+           id
         ],
         (err, result) => {
             if (err) {
@@ -78,5 +93,6 @@ const getCategoriaByUserQuery = async (query) => {
 module.exports = {
     getCategoriaQuery,
     getCategoriaByUserQuery,
-    createNewCustomCategoryQuery
+    createNewCustomCategoryQuery,
+    deleteNewCustomCategoryQuery
 };

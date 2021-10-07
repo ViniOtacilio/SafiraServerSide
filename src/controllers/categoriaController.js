@@ -1,6 +1,7 @@
 const { getCategories } = require('../services/categoriaService'); 
 const { getCategoriaByUser } = require('../services/categoriaService');
 const { createNewCustomCategory } = require('../services/categoriaService');
+const { deleteNewCustomCategory } = require('../services/categoriaService');
 
 const createCustomCategory = async (req, res, next) => {
 
@@ -12,7 +13,24 @@ const createCustomCategory = async (req, res, next) => {
         next();
     }
     catch (e) {
-        res.sendStatus(500);
+        return res.status(500).send({ success: false, error: { message: 'Houve um erro ao criar a categoria' } });
+        console.log(e);
+    }
+}
+
+const deleteCustomCategory = async (req, res, next) => {
+
+    const id  = req.params.id;
+    console.log(id);
+
+    try {
+        await deleteNewCustomCategory(id);
+        res.sendStatus(200);
+        next();
+    }
+    catch (e) {
+        return res.status(500).send({ success: false, error: { message: 'Houve um erro ao deletar a categoria ' + e} });
+        console.log(e);
     }
 }
 
@@ -59,5 +77,6 @@ const getCategoria = async (req, res, next) => {
 module.exports = {
     getAllCategories,
     getCategoria,
-    createCustomCategory
+    createCustomCategory,
+    deleteCustomCategory
 }

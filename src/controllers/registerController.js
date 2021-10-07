@@ -28,7 +28,7 @@ const createUser =  (req, res, next) => {
         createNewUser(name, email, password, repeatedPassword).then(loginUser);
     }
     catch(e) {
-        res.sendStatus(500);
+        return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o novo usuario' } });
     }
 }
 

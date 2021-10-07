@@ -53,7 +53,7 @@ const forgotPassword = async (req, res, next) => {
 
 
     sendEmail(user, token);
-    res.status(200).json({ message: "Check your email" });
+    res.status(200).json({ message: "Email sent,check your email. Token:" + token  });
 
 };
           
