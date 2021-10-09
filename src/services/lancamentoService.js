@@ -1,6 +1,7 @@
 const registerNewLancamentoQuery = require("../model/lancamentoUserQuery");
 const { getLancamentoQuery } = require('../model/lancamentoUserQuery');
 const { changeSaldo } = require("../controllers/saldoController");
+const { deleteNewLancamentoQuery } = require('../model/lancamentoUserQuery');
 
 const createNewLancamento = async (
   value,
@@ -35,6 +36,12 @@ const createNewLancamento = async (
       changeSaldo(userid, tipo_de_transacao, value);
   }
 };
+
+const deleteNewLancamento = async (id) => {
+
+    deleteNewLancamentoQuery(id);
+
+}
 
 const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id) => {
    
@@ -161,5 +168,6 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
 
 module.exports = {
   createNewLancamento,
-  getLancamentoByUser
+  getLancamentoByUser,
+  deleteNewLancamento
 };

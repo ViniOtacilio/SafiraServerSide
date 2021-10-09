@@ -14,6 +14,7 @@ const deleteNewCustomCategory = async (id) => {
 
 }
 
+
 const getCategories = async () => {
   let errors = [];
 

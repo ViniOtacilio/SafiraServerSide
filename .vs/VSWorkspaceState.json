@@ -9,6 +9,6 @@
     "\\src\\services",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\controllers\\saldoController.js",
+  "SelectedNode": "\\src\\routes\\router.js",
   "PreviewInSolutionExplorer": false
 }
