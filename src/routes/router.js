@@ -10,6 +10,7 @@ const { forgotPassword } = require('../utils/passwordReset');
 const { resetPassword } = require('../utils/passwordReset');
 const { createCustomCategory } = require('../controllers/categoriaController');
 const { deleteCustomCategory } = require('../controllers/categoriaController');
+const { deleteLancamento } = require('../controllers/lancamentoController');
 
 
 const router = express.Router();
@@ -24,5 +25,6 @@ router.post('/users/forgotPassword', forgotPassword);
 router.post('/users/resetPassword/:token', resetPassword);
 router.post('/categorias/createCustomCategory', createCustomCategory);
 router.get('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
+router.get('/deleteLancamento/:id', deleteLancamento);
 
 module.exports = router;

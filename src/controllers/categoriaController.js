@@ -13,7 +13,7 @@ const createCustomCategory = async (req, res, next) => {
         next();
     }
     catch (e) {
-        return res.status(500).send({ success: false, error: { message: 'Houve um erro ao criar a categoria' } });
+        return res.status(500).send({ success: false, error: { message: e } });
         console.log(e);
     }
 }
@@ -21,7 +21,6 @@ const createCustomCategory = async (req, res, next) => {
 const deleteCustomCategory = async (req, res, next) => {
 
     const id  = req.params.id;
-    console.log(id);
 
     try {
         await deleteNewCustomCategory(id);
@@ -29,7 +28,7 @@ const deleteCustomCategory = async (req, res, next) => {
         next();
     }
     catch (e) {
-        return res.status(500).send({ success: false, error: { message: 'Houve um erro ao deletar a categoria ' + e} });
+        return res.status(500).send({ success: false, error: { message: e} });
         console.log(e);
     }
 }

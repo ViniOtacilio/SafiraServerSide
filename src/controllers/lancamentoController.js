@@ -1,5 +1,6 @@
 const { createNewLancamento } = require('../services/lancamentoService'); 
 const { getLancamentoByUser } = require('../services/lancamentoService'); 
+const { deleteNewLancamento } = require('../services/lancamentoService'); 
 
 const createLancamento = async (req, res, next) => {
 
@@ -14,6 +15,22 @@ const createLancamento = async (req, res, next) => {
         return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o lancamento' } });
     }
 };
+
+
+const deleteLancamento = async (req, res, next) => {
+
+    const id = req.params.id;
+
+    try {
+        await deleteNewLancamento(id);
+        res.status(200).send({ message: "Lancamento deletado"});
+        next();
+    }
+    catch (e) {
+        return res.status(500).send({ success: false, error: { message: e } });
+        console.log(e);
+    }
+}
 
 const getLancamento = async (req, res, next) => {
 
@@ -44,5 +61,6 @@ const getLancamento = async (req, res, next) => {
 
 module.exports = {
     createLancamento,
-    getLancamento
+    getLancamento,
+    deleteLancamento
 }

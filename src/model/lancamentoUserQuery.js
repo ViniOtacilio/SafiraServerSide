@@ -28,6 +28,21 @@ const createNewLancamentoQuery = async (
   );
 };
 
+const deleteNewLancamentoQuery = async (id) => {
+    pool.query(
+        `DELETE FROM lancamentos WHERE
+         id = $1`,
+        [
+            id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
 const getLancamentoQuery = async (query) => {
     return new Promise(function(resolve, reject) {
         console.log('In model: '+ query);
@@ -45,5 +60,6 @@ const getLancamentoQuery = async (query) => {
 
 module.exports = {
   createNewLancamentoQuery,
-  getLancamentoQuery
+  getLancamentoQuery,
+  deleteNewLancamentoQuery
 };
