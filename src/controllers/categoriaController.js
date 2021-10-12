@@ -2,6 +2,8 @@ const { getCategories } = require('../services/categoriaService');
 const { getCategoriaByUser } = require('../services/categoriaService');
 const { createNewCustomCategory } = require('../services/categoriaService');
 const { deleteNewCustomCategory } = require('../services/categoriaService');
+const { getSaldo } = require('../services/categoriaService');
+
 
 const createCustomCategory = async (req, res, next) => {
 
@@ -73,9 +75,34 @@ const getCategoria = async (req, res, next) => {
 }
 
 
+const getCategoriaSaldo = async (req, res, next) => {
+
+    const user_id = req.query.user_id;
+    const start_date = req.query.start_date;
+    const end_date = req.query.end_date;
+
+    console.log("Dentro do Controller de getCategoriaSaldo:" + user_id + "-" + start_date + "-" + end_date);
+
+    try {
+        result = await getSaldo( user_id, start_date, end_date)
+        console.log('controller:');
+        console.log(result);
+        res.send(result);
+        next();
+    }
+    catch (e) { 
+        console.log(e)
+        res.send({
+            message:e
+         });
+    }
+}
+
+
 module.exports = {
     getAllCategories,
     getCategoria,
     createCustomCategory,
-    deleteCustomCategory
+    deleteCustomCategory,
+    getCategoriaSaldo
 }
