@@ -157,6 +157,8 @@ const getSaldo = async (user_id,  start_date, end_date) => {
             console.log(base_query);
         }
 
+        base_query = base_query + " AND (c.personalizada IS False OR c.user_id = "+user_id+")"
+
         base_query = base_query + " GROUP BY c.nome"
 
         console.log('final query: '+ base_query);
