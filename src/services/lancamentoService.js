@@ -43,6 +43,12 @@ const deleteNewLancamento = async (id) => {
 
 }
 
+const repeatAllLancamentos = async () => {
+    console.log("entrou");
+    repeateLancamentos();
+    console.log("rodou");
+}
+
 const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id) => {
    
   console.log("Dentro do service de getlancamento:" + user_id + "-" + id + "-" + status + "-" + titulo + "-" + start_date + "-" + end_date);
@@ -169,5 +175,6 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
 module.exports = {
   createNewLancamento,
   getLancamentoByUser,
-  deleteNewLancamento
+  deleteNewLancamento,
+  repeatAllLancamentos
 };
