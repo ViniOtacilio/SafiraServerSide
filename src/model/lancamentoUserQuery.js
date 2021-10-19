@@ -58,8 +58,24 @@ const getLancamentoQuery = async (query) => {
         })        
 };
 
+const repeateLancamentos = async (query) => {
+    pool.query(
+        `INSERT INTO lancamentos (SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario,repetido FROM lancamentos WHERE repetido = true)`,
+        [
+            id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
+
 module.exports = {
   createNewLancamentoQuery,
   getLancamentoQuery,
-  deleteNewLancamentoQuery
+    deleteNewLancamentoQuery,
+    repeateLancamentos
 };

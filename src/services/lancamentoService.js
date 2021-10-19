@@ -43,13 +43,19 @@ const deleteNewLancamento = async (id) => {
 
 }
 
+const repeatAllLancamentos = async () => {
+    console.log("entrou");
+    repeateLancamentos();
+    console.log("rodou");
+}
+
 const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id) => {
    
   console.log("Dentro do service de getlancamento:" + user_id + "-" + id + "-" + status + "-" + titulo + "-" + start_date + "-" + end_date);
 
   let errors = [];
 
-  var base_query = 'SELECT * FROM lancamentos WHERE userid IN ('+user_id+')';
+  var base_query = 'SELECT l.*, c.nome AS nome_categoria FROM lancamentos AS l LEFT JOIN categoria AS c ON l.categoriaid = c.id WHERE userid IN ('+user_id+')';
   console.log(base_query);
 
   if (!user_id) {
@@ -169,5 +175,6 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
 module.exports = {
   createNewLancamento,
   getLancamentoByUser,
-  deleteNewLancamento
+  deleteNewLancamento,
+  repeatAllLancamentos
 };
