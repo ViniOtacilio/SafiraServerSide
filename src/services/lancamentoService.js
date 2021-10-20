@@ -66,7 +66,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
       throw errors;
   } else {
       if (typeof id !== 'undefined' && id){
-          base_query = base_query + ' AND id IN ('+id+')';
+          base_query = base_query + ' AND l.id IN ('+id+')';
           console.log(base_query);
       } 
       if (typeof status !== 'undefined' && status ){

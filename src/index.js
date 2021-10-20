@@ -76,8 +76,8 @@ app.get("/", (req, res) => {
     return res.json({ message: "Server is up " + req.isAuthenticated()});
 });
 
-//Repetição mensal de lançamentos
-cron.schedule('*0 0 1 * *', function () {
+//Repeticao mensal de lancamentos
+cron.schedule('* 0 0 1 * *', function () {
     pool.query(
         `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE repetido = true`,
         (err, result) => {

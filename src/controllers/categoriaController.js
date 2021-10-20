@@ -7,10 +7,10 @@ const { getSaldo } = require('../services/categoriaService');
 
 const createCustomCategory = async (req, res, next) => {
 
-    const { user_id, name } = req.body;
+    const { user_id, newCategoryName } = req.body;
 
     try {
-        await createNewCustomCategory(user_id, name);
+        await createNewCustomCategory(user_id, newCategoryName);
         res.sendStatus(201);
         next();
     }
