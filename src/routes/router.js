@@ -2,7 +2,6 @@ const express = require('express');
 const { createUser } = require('../controllers/registerController');
 const { createLancamento } = require('../controllers/lancamentoController');
 const { getLancamento } = require('../controllers/lancamentoController');
-const { createSaldo } = require('../controllers/saldoController');
 const { getAllCategories} = require('../controllers/categoriaController');
 const { getCategoria } = require('../controllers/categoriaController');
 const { getSaldo } = require('../controllers/saldoController');
@@ -12,6 +11,7 @@ const { createCustomCategory } = require('../controllers/categoriaController');
 const { deleteCustomCategory } = require('../controllers/categoriaController');
 const { deleteLancamento } = require('../controllers/lancamentoController');
 const { getCategoriaSaldo } = require('../controllers/categoriaController')
+const { allCustomCategories } = require('../controllers/categoriaController')
 
 const router = express.Router();
 
@@ -27,5 +27,6 @@ router.post('/categorias/createCustomCategory', createCustomCategory);
 router.get('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
 router.get('/deleteLancamento/:id', deleteLancamento);
 router.get('/categorias/saldo', getCategoriaSaldo);
+router.get('/categorias/getCustomCategories', allCustomCategories);
 
 module.exports = router;

@@ -31,6 +31,29 @@ const deleteNewCustomCategoryQuery = async (id) => {
     )
 }
 
+const getAllCustomCategoriesQuery = async (user_id) => {
+  return new Promise(function(resolve, reject) {
+  pool.query(
+      `SELECT * FROM categoria WHERE
+       user_id = $1`,
+      [
+        user_id
+      ],
+      (err, result) => {
+          if (err) {
+              throw err;
+          }
+          else {
+            let cloneArray = JSON.parse(JSON.stringify(result.rows));
+            resolve(cloneArray);
+          }
+      }
+
+  )
+  });
+};
+
+
 const getCategoriaQuery = async () => {
     let cloneArray;
     pool.query(
@@ -130,5 +153,6 @@ module.exports = {
     getCategoriaByUserQuery,
     createNewCustomCategoryQuery,
     deleteNewCustomCategoryQuery,
-    getCategoriaSaldo
+    getCategoriaSaldo,
+    getAllCustomCategoriesQuery
 };

@@ -3,6 +3,7 @@ const { getCategoriaByUser } = require('../services/categoriaService');
 const { createNewCustomCategory } = require('../services/categoriaService');
 const { deleteNewCustomCategory } = require('../services/categoriaService');
 const { getSaldo } = require('../services/categoriaService');
+const { getAllCustomCategories } = require('../services/categoriaService');
 
 
 const createCustomCategory = async (req, res, next) => {
@@ -32,6 +33,19 @@ const deleteCustomCategory = async (req, res, next) => {
     catch (e) {
         return res.status(500).send({ success: false, error: { message: e} });
         console.log(e);
+    }
+}
+
+const allCustomCategories = async (req, res, next) => {
+
+    const user_id = req.query.user_id;
+    try {
+        let customCategories = await getAllCustomCategories(user_id);
+        res.send(customCategories);
+        next();
+    }
+    catch (e) {
+        return res.status(500).send({ success: false, error: { message: e} });
     }
 }
 
@@ -104,5 +118,6 @@ module.exports = {
     getCategoria,
     createCustomCategory,
     deleteCustomCategory,
-    getCategoriaSaldo
+    getCategoriaSaldo,
+    allCustomCategories
 }
