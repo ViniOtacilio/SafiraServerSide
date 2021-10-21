@@ -2,10 +2,8 @@ const getCategoriaQuery = require("../model/categoriasQuery");
 const { getCategoriaByUserQuery } = require("../model/categoriasQuery");
 const { getCategoriaSaldo } = require("../model/categoriasQuery");
 
-const createNewCustomCategory = async (user_id, name) => {
-
-    getCategoriaQuery.createNewCustomCategoryQuery(user_id, name);
-
+const createNewCustomCategory = async (user_id, newCategoryName) => {
+    getCategoriaQuery.createNewCustomCategoryQuery(user_id, newCategoryName);
 }
 
 const deleteNewCustomCategory = async (id) => {
