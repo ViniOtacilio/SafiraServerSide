@@ -17,7 +17,6 @@ const createNewLancamentoQuery = async (
       userid,
       categoriaid,
       titulo_lancamento,
-      // data_lancamento,
       comentario
     ],
     (err, result) => {
@@ -60,10 +59,8 @@ const getLancamentoQuery = async (query) => {
 
 const repeateLancamentos = async (query) => {
     pool.query(
-        `INSERT INTO lancamentos (SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario,repetido FROM lancamentos WHERE repetido = true)`,
-        [
-            id
-        ],
+        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE repetido = true
+        `,
         (err, result) => {
             if (err) {
                 throw err;

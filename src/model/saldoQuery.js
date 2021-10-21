@@ -18,7 +18,7 @@ const createNewSaldo = (userid) => {
     );
 };
 
-const changeSaldo = (userid, tipo_de_transacao, value) => {
+/*const changeSaldo = (userid, tipo_de_transacao, value) => {
 
     if (tipo_de_transacao == 1) {
         pool.query(`
@@ -57,7 +57,7 @@ const changeSaldo = (userid, tipo_de_transacao, value) => {
 
     }
     
-}
+}*/
 
 const getSaldo = (user_id, callback) => {
 
@@ -81,6 +81,5 @@ const getSaldo = (user_id, callback) => {
 
 module.exports = {
     createNewSaldo,
-    changeSaldo,
     getSaldo
 };

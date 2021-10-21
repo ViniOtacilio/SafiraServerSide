@@ -1,5 +1,5 @@
 const { createNewSaldo } = require('../services/saldoService');
-const { changeSaldoService } = require('../services/saldoService');
+//const { changeSaldoService } = require('../services/saldoService');
 const { getSaldoService } = require('../services/saldoService');
 
 
@@ -13,7 +13,7 @@ const createSaldo = async (userid) => {
     }
 }
 
-const changeSaldo = async (userid, tipo_de_transacao, value) => {
+/*const changeSaldo = async (userid, tipo_de_transacao, value) => {
     try {
         await changeSaldoService(userid, tipo_de_transacao, value);
     }
@@ -21,7 +21,7 @@ const changeSaldo = async (userid, tipo_de_transacao, value) => {
         console.log("Saldo nao alterado: " + e);
     }
 
-}
+}*/
 
 const getSaldo = async (req, res, next) => {
 
@@ -40,6 +40,5 @@ const getSaldo = async (req, res, next) => {
 
 module.exports = {
     createSaldo,
-    changeSaldo,
     getSaldo
 }

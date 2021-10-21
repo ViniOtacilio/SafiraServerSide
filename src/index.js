@@ -10,6 +10,7 @@ const session = require("express-session");
 const initializePassport = require("./utils/passportConfig.js");
 const FileStore = require('session-file-store')(session);
 const { pool } = require("./database.js");
+const { teste } = require("./controllers/lancamentoController.js");
 
 
 
@@ -77,8 +78,8 @@ app.get("/", (req, res) => {
 });
 
 //Repetição mensal de lançamentos
-cron.schedule('*0 0 1 * *', function () {
-    pool.query(
+cron.schedule('0 0 1 * *', function () {
+  pool.query(
         `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE repetido = true`,
         (err, result) => {
             if (err) {
@@ -87,6 +88,28 @@ cron.schedule('*0 0 1 * *', function () {
         }
     )
 });
+
+cron.schedule('0 0 1 * *', function () {
+    pool.query(
+        `UPDATE lancamentos SET qtd_parcelas=qtd_parcelas-1 WHERE parcelado = true AND qtd_parcelas > 1`,
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+
+    pool.query(
+        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario, FROM lancamentos WHERE parcelado = true AND qtd_parcelas > 1`,
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+});
+
+
 
 app.listen(3333);
 

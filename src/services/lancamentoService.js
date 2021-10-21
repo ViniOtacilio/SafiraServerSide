@@ -1,6 +1,6 @@
 const registerNewLancamentoQuery = require("../model/lancamentoUserQuery");
 const { getLancamentoQuery } = require('../model/lancamentoUserQuery');
-const { changeSaldo } = require("../controllers/saldoController");
+//const { changeSaldo } = require("../controllers/saldoController");
 const { deleteNewLancamentoQuery } = require('../model/lancamentoUserQuery');
 
 const createNewLancamento = async (
@@ -10,11 +10,10 @@ const createNewLancamento = async (
   categoriaid,
   titulo_lancamento,
   comentario
-
 ) => {
   let errors = [];
 
-  if (!value || !tipo_de_transacao || !categoriaid || !titulo_lancamento) {
+    if (!value || !tipo_de_transacao || !userid) {
     errors.push({ message: "Por favor preencha todos os campos obrigatórios!" });
   }
 
@@ -33,7 +32,7 @@ const createNewLancamento = async (
 
       console.log("lancamento criado");
 
-      changeSaldo(userid, tipo_de_transacao, value);
+      //changeSaldo(userid, tipo_de_transacao, value);
   }
 };
 
