@@ -10,15 +10,18 @@ const { resetPassword } = require('../utils/passwordReset');
 const { createCustomCategory } = require('../controllers/categoriaController');
 const { deleteCustomCategory } = require('../controllers/categoriaController');
 const { deleteLancamento } = require('../controllers/lancamentoController');
-const { getCategoriaSaldo } = require('../controllers/categoriaController')
-const { allCustomCategories } = require('../controllers/categoriaController')
+const { getCategoriaSaldo } = require('../controllers/categoriaController');
+const { allCustomCategories } = require('../controllers/categoriaController');
+const { createPlanejamento } = require('../controllers/planejamentoController');
+const { deletePlanejamento } = require('../controllers/planejamentoController');
+const { getPlanejamento } = require('../controllers/planejamentoController');
 
 const router = express.Router();
 
 router.post('/users/register', createUser);
 router.post('/users/novoLancamento', createLancamento);
 router.get('/users/lancamento', getLancamento);
-router.get('/categorias', getAllCategories)
+router.get('/categorias', getAllCategories) 
 router.get('/users/categoria', getCategoria)
 router.get('/users/saldo', getSaldo);
 router.post('/users/forgotPassword', forgotPassword);
@@ -28,5 +31,8 @@ router.get('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
 router.get('/deleteLancamento/:id', deleteLancamento);
 router.get('/categorias/saldo', getCategoriaSaldo);
 router.get('/categorias/getCustomCategories', allCustomCategories);
+router.post('/planejamento/createPlanejamento', createPlanejamento);
+router.get('/planejamento/deletePlanejamento', deletePlanejamento);
+router.get('/planejamento/getPlanejamento', getPlanejamento);
 
 module.exports = router;
