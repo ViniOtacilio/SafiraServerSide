@@ -27,7 +27,7 @@ router.get('/users/saldo', getSaldo);
 router.post('/users/forgotPassword', forgotPassword);
 router.post('/users/resetPassword/:token', resetPassword);
 router.post('/categorias/createCustomCategory', createCustomCategory);
-router.get('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
+router.post('/categorias/deleteCustomCategory/:id', deleteCustomCategory);
 router.get('/deleteLancamento/:id', deleteLancamento);
 router.get('/categorias/saldo', getCategoriaSaldo);
 router.get('/categorias/getCustomCategories', allCustomCategories);
