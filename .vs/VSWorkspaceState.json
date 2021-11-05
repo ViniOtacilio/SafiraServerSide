@@ -1,14 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\sessions",
-    "\\src",
-    "\\src\\controllers",
-    "\\src\\model",
-    "\\src\\routes",
-    "\\src\\services",
-    "\\src\\utils"
+    "\\src"
   ],
-  "SelectedNode": "\\src\\utils\\passportConfig.js",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
