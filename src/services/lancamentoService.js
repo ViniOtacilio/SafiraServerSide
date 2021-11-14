@@ -9,7 +9,11 @@ const createNewLancamento = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  comentario
+  comentario,
+  is_repetitivo,
+  is_parcelado,
+  qnd_parcelas,
+  dia_cobranca
 ) => {
   let errors = [];
 
@@ -17,7 +21,61 @@ const createNewLancamento = async (
     errors.push({ message: "Por favor preencha todos os campos obrigatórios!" });
   }
 
+  if (typeof is_repetitivo != 'undefined'){
+        console.log(is_repetitivo)
+        if (is_repetitivo != "false" && is_repetitivo != "true"){
+            errors.push({ message: "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" });
+        }
+  }
+  else{
+        is_parcelado = 'false'
+        console.log('in else ' + is_parcelado)
+  }
+
+  if (typeof is_parcelado != 'undefined'){
+        console.log(is_parcelado)
+        if (is_parcelado != 'false' && is_parcelado != 'true'){
+            errors.push({ message: "Por favor preencha o campo de parcelamento com um valor válido 'false' ou 'true'!" });
+        }
+  }
+  else{
+        is_parcelado = 'false'
+        console.log('in else ' + is_parcelado)
+   }
+
+   if (typeof qnd_parcelas != 'undefined'){
+        console.log(qnd_parcelas)
+        if (Number.isInteger(qnd_parcelas) != true){
+            errors.push({ message: "Por favor preencha o campo de qnd_parcelas com um número válido"});
+        }
+        else{
+            if (qnd_parcelas < 1) {
+                errors.push({ message: "Por favor preencha o campo de qnd_parcelas com um valor válido"});
+              }
+        }
+    }
+    else{
+        qnd_parcelas = 0
+        console.log('in else ' + qnd_parcelas)
+    }
+
+    if (typeof dia_cobranca != 'undefined'){
+        console.log(dia_cobranca)
+        if (Number.isInteger(dia_cobranca) != true){
+            errors.push({ message: "Por favor preencha o campo de dia_cobranca com um número válido"});
+        }
+        else{
+            if (dia_cobranca < 1 || dia_cobranca > 31) {
+                errors.push({ message: "Por favor preencha o campo de dia_cobranca com um dia válido"});
+              }
+        }
+  }
+
+  console.log('before query')
+
   if (errors.length > 0) {
+    console.log('error')
+    console.log(errors)
     throw errors;
   } else {
     //Criando novo lançamento no banco de dados
@@ -27,7 +85,11 @@ const createNewLancamento = async (
       userid,
       categoriaid,
       titulo_lancamento,
-      comentario
+      comentario,
+      is_repetitivo,
+      is_parcelado,
+      qnd_parcelas,
+      dia_cobranca
       );
 
       console.log("lancamento criado");
