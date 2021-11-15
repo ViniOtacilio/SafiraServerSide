@@ -222,13 +222,74 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
         console.log(base_query);
     }
 
+      base_query = base_query + " OR (userid IN ("+user_id+") AND parcelado IS TRUE)"
       console.log('final query: '+ base_query);
 
-      data = await getLancamentoQuery( base_query );
-      console.log('outside return func : ');
-      console.log(data);
+      start_date = Date.parse(start_date)
+      end_date = Date.parse(end_date)
+      cur_date = new Date()
+      console.log('cur_date: ' + cur_date)
+      new_data = []
 
-      return data ;
+      data = await getLancamentoQuery( base_query );
+     
+      for(i=0; i<data.length;i++){
+        if(data[i].parcelado == true){
+            const lancamento = JSON.parse(JSON.stringify(data[i]))
+
+            var parcelas = lancamento.qtd_parcelas
+            var data_lanc = new Date(Date.parse(lancamento.data_lancamento))
+            var value = lancamento.value
+
+            valor_parcela = value/parcelas
+
+            data[i].valor_parcela = valor_parcela.toFixed(2)
+
+            parcela_atual =  cur_date.getMonth() -  data_lanc.getMonth() + 
+                (12 * (cur_date.getFullYear() - data_lanc.getFullYear()))
+            
+            data[i].parcela_atual = parcela_atual
+
+            console.log('before : ' + data[i].data_lancamento)
+           
+            first_parcela_date = data_lanc.setMonth(data_lanc.getMonth()+1)
+            last_parcela_date = data_lanc.setMonth(data_lanc.getMonth()+parcelas)
+
+            console.log('after : ' + data[i].data_lancamento)
+
+            console.log('atual : ' + parcela_atual)
+
+            if(Number.isNaN(start_date) == false && Number.isNaN(end_date) == false){
+              
+                if(last_parcela_date >= start_date && last_parcela_date <= end_date){
+                    new_data.push(data[i])
+                }
+            }
+            else{
+                if(Number.isNaN(start_date) == false){
+                    
+                    if(last_parcela_date >= start_date){
+                        new_data.push(data[i])
+                    }
+                }
+                if(Number.isNaN(end_date) == false){
+                  
+                    if(last_parcela_date <= end_date){
+                        new_data.push(data[i])
+                    }
+                }
+                if(Number.isNaN(start_date) == true && Number.isNaN(end_date) == true){
+                   
+                    new_data.push(data[i])
+                }
+            }
+        }
+        else{
+            new_data.push(data[i])
+        }
+      }
+
+      return new_data;
 
   }    
 };

@@ -10,14 +10,14 @@ const teste = async (req, res, next) => {
 
 const createLancamento = async (req, res, next) => {
 
-    const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qnd_parcelas, dia_cobranca} = req.body;
+    const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca} = req.body;
 
     console.log("Dentro do Controller de createlancamento:" +  value + " | " + 
     tipo_de_transacao + " | " +  userid + " | " +  categoriaid+ " | " +  titulo_lancamento  + " | " +  comentario + " | " + 
-    is_repetitivo + " | " +  is_parcelado + " | " +  qnd_parcelas + " | " +  dia_cobranca);
+    is_repetitivo + " | " +  is_parcelado + " | " +  qtd_parcelas + " | " +  dia_cobranca);
 
     try {
-        await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qnd_parcelas, dia_cobranca);
+        await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca);
         res.sendStatus(201);
         next();
     }
