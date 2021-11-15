@@ -9,7 +9,11 @@ const createNewLancamento = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  comentario
+  comentario,
+  is_repetitivo,
+  is_parcelado,
+  qnd_parcelas,
+  dia_cobranca
 ) => {
   let errors = [];
 
@@ -17,7 +21,61 @@ const createNewLancamento = async (
     errors.push({ message: "Por favor preencha todos os campos obrigatórios!" });
   }
 
+  if (typeof is_repetitivo != 'undefined'){
+        console.log(is_repetitivo)
+        if (is_repetitivo != "false" && is_repetitivo != "true"){
+            errors.push({ message: "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" });
+        }
+  }
+  else{
+        is_parcelado = 'false'
+        console.log('in else ' + is_parcelado)
+  }
+
+  if (typeof is_parcelado != 'undefined'){
+        console.log(is_parcelado)
+        if (is_parcelado != 'false' && is_parcelado != 'true'){
+            errors.push({ message: "Por favor preencha o campo de parcelamento com um valor válido 'false' ou 'true'!" });
+        }
+  }
+  else{
+        is_parcelado = 'false'
+        console.log('in else ' + is_parcelado)
+   }
+
+   if (typeof qnd_parcelas != 'undefined'){
+        console.log(qnd_parcelas)
+        if (Number.isInteger(qnd_parcelas) != true){
+            errors.push({ message: "Por favor preencha o campo de qnd_parcelas com um número válido"});
+        }
+        else{
+            if (qnd_parcelas < 1) {
+                errors.push({ message: "Por favor preencha o campo de qnd_parcelas com um valor válido"});
+              }
+        }
+    }
+    else{
+        qnd_parcelas = 0
+        console.log('in else ' + qnd_parcelas)
+    }
+
+    if (typeof dia_cobranca != 'undefined'){
+        console.log(dia_cobranca)
+        if (Number.isInteger(dia_cobranca) != true){
+            errors.push({ message: "Por favor preencha o campo de dia_cobranca com um número válido"});
+        }
+        else{
+            if (dia_cobranca < 1 || dia_cobranca > 31) {
+                errors.push({ message: "Por favor preencha o campo de dia_cobranca com um dia válido"});
+              }
+        }
+  }
+
+  console.log('before query')
+
   if (errors.length > 0) {
+    console.log('error')
+    console.log(errors)
     throw errors;
   } else {
     //Criando novo lançamento no banco de dados
@@ -27,7 +85,11 @@ const createNewLancamento = async (
       userid,
       categoriaid,
       titulo_lancamento,
-      comentario
+      comentario,
+      is_repetitivo,
+      is_parcelado,
+      qnd_parcelas,
+      dia_cobranca
       );
 
       console.log("lancamento criado");
@@ -160,13 +222,74 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
         console.log(base_query);
     }
 
+      base_query = base_query + " OR (userid IN ("+user_id+") AND parcelado IS TRUE)"
       console.log('final query: '+ base_query);
 
-      data = await getLancamentoQuery( base_query );
-      console.log('outside return func : ');
-      console.log(data);
+      start_date = Date.parse(start_date)
+      end_date = Date.parse(end_date)
+      cur_date = new Date()
+      console.log('cur_date: ' + cur_date)
+      new_data = []
 
-      return data ;
+      data = await getLancamentoQuery( base_query );
+     
+      for(i=0; i<data.length;i++){
+        if(data[i].parcelado == true){
+            const lancamento = JSON.parse(JSON.stringify(data[i]))
+
+            var parcelas = lancamento.qtd_parcelas
+            var data_lanc = new Date(Date.parse(lancamento.data_lancamento))
+            var value = lancamento.value
+
+            valor_parcela = value/parcelas
+
+            data[i].valor_parcela = valor_parcela.toFixed(2)
+
+            parcela_atual =  cur_date.getMonth() -  data_lanc.getMonth() + 
+                (12 * (cur_date.getFullYear() - data_lanc.getFullYear()))
+            
+            data[i].parcela_atual = parcela_atual
+
+            console.log('before : ' + data[i].data_lancamento)
+           
+            first_parcela_date = data_lanc.setMonth(data_lanc.getMonth()+1)
+            last_parcela_date = data_lanc.setMonth(data_lanc.getMonth()+parcelas)
+
+            console.log('after : ' + data[i].data_lancamento)
+
+            console.log('atual : ' + parcela_atual)
+
+            if(Number.isNaN(start_date) == false && Number.isNaN(end_date) == false){
+              
+                if(last_parcela_date >= start_date && last_parcela_date <= end_date){
+                    new_data.push(data[i])
+                }
+            }
+            else{
+                if(Number.isNaN(start_date) == false){
+                    
+                    if(last_parcela_date >= start_date){
+                        new_data.push(data[i])
+                    }
+                }
+                if(Number.isNaN(end_date) == false){
+                  
+                    if(last_parcela_date <= end_date){
+                        new_data.push(data[i])
+                    }
+                }
+                if(Number.isNaN(start_date) == true && Number.isNaN(end_date) == true){
+                   
+                    new_data.push(data[i])
+                }
+            }
+        }
+        else{
+            new_data.push(data[i])
+        }
+      }
+
+      return new_data;
 
   }    
 };

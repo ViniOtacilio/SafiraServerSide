@@ -6,18 +6,28 @@ const createNewLancamentoQuery = async (
   userid,
   categoriaid,
   titulo_lancamento,
-  comentario
+  comentario,
+  is_repetitivo,
+  is_parcelado,
+  qnd_parcelas,
+  dia_cobranca
 ) => {
+
+  console.log("INSERT INTO lancamentos (value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, data_lancamento, data_ultima_alteracao,comentario, repetitivo, parcelado, qtd_parcela, dia_cobranca) VALUES ( " +value+"," +tipo_de_transacao+","+userid+","+categoriaid+","+titulo_lancamento+","+comentario+","+is_repetitivo+","+is_parcelado+","+qnd_parcelas+","+dia_cobranca)
   pool.query(
-    `INSERT INTO lancamentos (value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, data_lancamento, data_ultima_alteracao,comentario)
-         VALUES ($1, $2, $3, $4, $5, current_timestamp, current_timestamp, $6)`,
+    `INSERT INTO lancamentos (value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, data_lancamento, data_ultima_alteracao,comentario, repetido, parcelado, qtd_parcelas, dia_cobranca)
+         VALUES ($1, $2, $3, $4, $5, current_timestamp, current_timestamp, $6, $7, $8, $9, $10)`,
     [
       value,
       tipo_de_transacao,
       userid,
       categoriaid,
       titulo_lancamento,
-      comentario
+      comentario,
+      is_repetitivo,
+      is_parcelado,
+      qnd_parcelas,
+      dia_cobranca
     ],
     (err, result) => {
       if (err) {
