@@ -14,10 +14,10 @@ const createLancamento = async (req, res, next) => {
 
     try {
         await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario);
-        res.sendStatus(201);
-        next();
+        return res.status(201);
     }
     catch (e) {
+        console.log(e);
         return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o lancamento' + e.message } });
     }
 };

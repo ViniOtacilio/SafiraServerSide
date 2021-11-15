@@ -10,9 +10,6 @@ const session = require("express-session");
 const initializePassport = require("./utils/passportConfig.js");
 const FileStore = require('session-file-store')(session);
 const { pool } = require("./database.js");
-const { teste } = require("./controllers/lancamentoController.js");
-
-
 
 cors({ credentials: true, origin: true });
 app.use(express.urlencoded({ extended: true }));

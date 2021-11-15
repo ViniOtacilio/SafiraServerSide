@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src\\model",
+    "\\src\\services",
+    "\\__tests__"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\__tests__\\testesLancamento.spec.ts",
   "PreviewInSolutionExplorer": false
 }
