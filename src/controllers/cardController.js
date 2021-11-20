@@ -42,12 +42,12 @@ const deleteCard = async (req, res, next) => {
 
 const getCard = async (req, res, next) => {
    
-    const { user_id, card_name } = req.body;
+    const { user_id, card_name, card_id } = req.body;
 
-    console.log('controller: ' + user_id + ' | ' + card_name)
+    console.log('controller: ' + user_id + ' | ' + card_name + ' | ' + card_id)
 
     try {
-        result = await getNewCard(user_id, card_name);
+        result = await getNewCard(user_id, card_name, card_id);
         console.log(result);
         res.send(result);
         next();

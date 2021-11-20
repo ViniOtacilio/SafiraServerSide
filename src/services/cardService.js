@@ -58,7 +58,7 @@ const deleteNewCard = async (user_id, card_name) => {
     
 }
 
-const getNewCard = async (user_id, card_name) => {
+const getNewCard = async (user_id, card_name, card_id) => {
     let errors = [];
 
     if (!user_id) {
@@ -70,7 +70,7 @@ const getNewCard = async (user_id, card_name) => {
         throw errors;
     } 
 
-      data = await getCardQuery( user_id, card_name );
+      data = await getCardQuery( user_id, card_name, card_id);
 
       return data;
 
