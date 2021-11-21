@@ -2,11 +2,6 @@ const { createNewLancamento } = require('../services/lancamentoService');
 const { getLancamentoByUser } = require('../services/lancamentoService'); 
 const { deleteNewLancamento } = require('../services/lancamentoService'); 
 
-const teste = async (req, res, next) => {
-
-    console.log("entrou na fun��o");
-
-};
 
 const createLancamento = async (req, res, next) => {
 
@@ -18,7 +13,7 @@ const createLancamento = async (req, res, next) => {
 
     try {
         await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id);
-        res.sendStatus(201);
+        return res.status(201);
         next();
     }
     catch (e) {
@@ -34,7 +29,7 @@ const deleteLancamento = async (req, res, next) => {
 
     try {
         await deleteNewLancamento(id);
-        res.status(200).send({ message: "Lancamento deletado"});
+        return res.status(200).send({ message: "Lancamento deletado"});
         next();
     }
     catch (e) {
@@ -74,6 +69,5 @@ const getLancamento = async (req, res, next) => {
 module.exports = {
     createLancamento,
     getLancamento,
-    deleteLancamento,
-    teste
+    deleteLancamento
 }

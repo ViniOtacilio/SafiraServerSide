@@ -106,9 +106,20 @@ const createNewLancamento = async (
 };
 
 const deleteNewLancamento = async (id) => {
+    let errors = [];
 
-    deleteNewLancamentoQuery(id);
+    if (!id) {
 
+        errors.push({ message: "Sem id" });
+    }
+
+    if (errors.length > 0) {
+        console.log(errors)
+        throw errors;
+    }
+    else {
+        deleteNewLancamentoQuery(id);
+    }
 }
 
 const repeatAllLancamentos = async () => {

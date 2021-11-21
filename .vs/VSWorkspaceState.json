@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\src",
+    "\\src\\controllers",
     "\\src\\model",
+    "\\src\\routes",
     "\\src\\services",
     "\\__tests__"
   ],
-  "SelectedNode": "\\__tests__\\testesLancamento.spec.ts",
+  "SelectedNode": "\\src\\services\\lancamentoService.js",
   "PreviewInSolutionExplorer": false
 }

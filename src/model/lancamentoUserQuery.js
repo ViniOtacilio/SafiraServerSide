@@ -79,6 +79,5 @@ const getLancamentoQuery = async (query) => {
 module.exports = {
   createNewLancamentoQuery,
   getLancamentoQuery,
-  deleteNewLancamentoQuery,
-  repeateLancamentos
+  deleteNewLancamentoQuery
 };

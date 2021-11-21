@@ -39,9 +39,9 @@ var express = require("express");
 var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-var createLancamento = require("../src/controllers/lancamentoController.js").createLancamento;
-var deleteLancamento = require("../src/controllers/lancamentoController.js").deleteLancamento;
-describe("Teste criacao lancamento, caso ideal", function () {
+var createCard = require("../src/controllers/cardController.js").createCard;
+var deleteCard = require("../src/controllers/cardController.js").deleteCard;
+describe("Teste criacao card, caso ideal", function () {
     test("Deve retornar 201", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
@@ -49,12 +49,8 @@ describe("Teste criacao lancamento, caso ideal", function () {
                 case 0:
                     req = {
                         body: {
-                            value: 100,
-                            tipo_de_transacao: 1,
-                            userid: 19,
-                            categoriaid: 1,
-                            titulo_lancamento: 'Salario',
-                            comentario: 'teste'
+                            user_id: 19,
+                            card_name: 'teste'
                         },
                     };
                     res = {
@@ -71,7 +67,7 @@ describe("Teste criacao lancamento, caso ideal", function () {
                     };
                     next = function () { };
                     output = 201;
-                    return [4 /*yield*/, createLancamento(req, res, next)];
+                    return [4 /*yield*/, createCard(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -80,7 +76,7 @@ describe("Teste criacao lancamento, caso ideal", function () {
         });
     }); });
 });
-describe("Teste criacao lancamento, caso erro", function () {
+describe("Teste criacao card, caso erro", function () {
     test("Deve retornar 500", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
@@ -105,7 +101,7 @@ describe("Teste criacao lancamento, caso erro", function () {
                     };
                     next = function () { };
                     output = 500;
-                    return [4 /*yield*/, createLancamento(req, res, next)];
+                    return [4 /*yield*/, createCard(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -114,15 +110,16 @@ describe("Teste criacao lancamento, caso erro", function () {
         });
     }); });
 });
-describe("Teste deletar lancamento, caso ideal", function () {
+describe("Teste deletar card, caso ideal", function () {
     test("Deve retornar 200", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     req = {
-                        params: {
-                            id: 1
+                        body: {
+                            user_id: 19,
+                            card_name: 'teste'
                         },
                     };
                     res = {
@@ -139,7 +136,7 @@ describe("Teste deletar lancamento, caso ideal", function () {
                     };
                     next = function () { };
                     output = 200;
-                    return [4 /*yield*/, deleteLancamento(req, res, next)];
+                    return [4 /*yield*/, deleteCard(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -148,14 +145,14 @@ describe("Teste deletar lancamento, caso ideal", function () {
         });
     }); });
 });
-describe("Teste deletar lancamento, caso erro", function () {
+describe("Teste deletar card, caso erro", function () {
     test("Deve retornar 500", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     req = {
-                        params: {},
+                        body: {},
                     };
                     res = {
                         _status: null,
@@ -171,7 +168,7 @@ describe("Teste deletar lancamento, caso erro", function () {
                     };
                     next = function () { };
                     output = 500;
-                    return [4 /*yield*/, deleteLancamento(req, res, next)];
+                    return [4 /*yield*/, deleteCard(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -180,4 +177,4 @@ describe("Teste deletar lancamento, caso erro", function () {
         });
     }); });
 });
-//# sourceMappingURL=testesLancamento.spec.js.map
+//# sourceMappingURL=testesCard.js.map
