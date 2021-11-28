@@ -53,7 +53,7 @@ const forgotPassword = async (req, res, next) => {
 
 
     sendEmail(user, token);
-    res.status(200).json({ message: "Check your email" });
+    res.status(200).json({ message: "Email sent,check your email. Token:" + token  });
 
 };
           
@@ -69,7 +69,7 @@ const resetPassword =  async (req, res) => {
    /* if (reset_link) {
         jwt.verify(reset_link, sendGridKey, (error, decodedToken) => {
             if (error) {
-                res.send("Token inválido");
+                res.send("Token invï¿½lido");
             }
         });
     }*/
@@ -105,12 +105,12 @@ const resetPassword =  async (req, res) => {
 
 function sendEmail(user, token) {
     sgMail.setApiKey(sendGridKey);
-    console.log("dentro da função do email" + user.email);
+    console.log("dentro da funï¿½ï¿½o do email" + user.email);
     const msg = {
         to: user.email,
-        from: "consacretads@gmail.com", // your email
-        subject: "Mudança de Senha",
-        html: `<p>Você requisitou uma mudança de senha, para concluir o processo clique no link abaixo:</p>
+        from: "safiranoreply@gmail.com", // your email
+        subject: "Recuperar Senha",
+        html: `<p>Precisa mudar sua senha? Para concluir o processo clique no link abaixo:</p>
      <a href="http://localhost:3333/api/users/resetPassword/${token}">Mudar Senha</a>
    `
     };

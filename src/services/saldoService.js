@@ -17,7 +17,7 @@ const createNewSaldo = async (userid) => {
     }
 };
 
-const changeSaldoService = async (userid, tipo_de_transacao, value) => {
+/*const changeSaldoService = async (userid, tipo_de_transacao, value) => {
     let errors = [];
 
     if (!userid) {
@@ -30,7 +30,7 @@ const changeSaldoService = async (userid, tipo_de_transacao, value) => {
         changeSaldoQuery.changeSaldo(userid, tipo_de_transacao, value);
     }
 
-}
+}*/
 
 const getSaldoService = async (user_id) => {
     let errors = [];
@@ -50,6 +50,5 @@ const getSaldoService = async (user_id) => {
 
 module.exports = {
     createNewSaldo,
-    changeSaldoService,
     getSaldoService
 };

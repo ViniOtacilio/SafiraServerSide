@@ -43,8 +43,7 @@ const createUser =  (req, res, next) => {
 
     }
     catch(e) {
-        console.log(e);
-        res.sendStatus(500);
+        return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o novo usuario' } });
     }
 }
 

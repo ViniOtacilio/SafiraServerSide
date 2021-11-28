@@ -1,5 +1,59 @@
 const { pool } = require("../database.js");
 
+const createNewCustomCategoryQuery = async (user_id, name) => {
+    pool.query(
+        `INSERT INTO categoria (nome, personalizada, user_id)
+         values($1,true,$2)`,
+        [
+            name,
+            user_id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
+const deleteNewCustomCategoryQuery = async (id) => {
+    pool.query(
+        `DELETE FROM categoria WHERE
+         id = $1`,
+        [
+           id
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+}
+
+const getAllCustomCategoriesQuery = async (user_id) => {
+  return new Promise(function(resolve, reject) {
+  pool.query(
+      `SELECT * FROM categoria WHERE
+       user_id = $1`,
+      [
+        user_id
+      ],
+      (err, result) => {
+          if (err) {
+              throw err;
+          }
+          else {
+            let cloneArray = JSON.parse(JSON.stringify(result.rows));
+            resolve(cloneArray);
+          }
+      }
+
+  )
+  });
+};
+
+
 const getCategoriaQuery = async () => {
     let cloneArray;
     pool.query(
@@ -27,12 +81,6 @@ const getCategoriaByUserQuery = async (query) => {
               throw (err) ;
           }
           else{
-            //console.log(result.rows.length);
-           // console.log(result.rows);
-           // console.log(result.rows[0]);
-           // console.log(Object.values(result.rows[0]));
-           // console.log(result.rows[1]);
-            //console.log(Object.values(result.rows[1]));
 
             if(result.rows.length == 0){    
               console.log( 'nenhum lancamento encontrado')
@@ -65,7 +113,46 @@ const getCategoriaByUserQuery = async (query) => {
   });
 };
 
+
+const getCategoriaSaldo = async (query) => {
+  return new Promise(function(resolve, reject) {
+       console.log('In model: '+ query);
+       categorias = []
+
+       pool.query(query, (err, result) => {
+          if (err) {
+              throw (err) ;
+          }
+          else{
+
+            if(result.rows.length == 0){    
+              console.log( 'nenhum lancamento encontrado')
+              resolve('nenhum lancamento encontrado') 
+              return
+            }
+
+            for(let i = 0; i < result.rows.length; i++){
+              console.log(i);
+              categorias.push(Object.values(result.rows[i]))
+            }
+
+            console.log(categorias);
+
+            cloneArray = JSON.parse(JSON.stringify(result.rows));
+            resolve(cloneArray);
+
+          }
+     
+          });
+  });
+};
+
+
 module.exports = {
     getCategoriaQuery,
-    getCategoriaByUserQuery
+    getCategoriaByUserQuery,
+    createNewCustomCategoryQuery,
+    deleteNewCustomCategoryQuery,
+    getCategoriaSaldo,
+    getAllCustomCategoriesQuery
 };
