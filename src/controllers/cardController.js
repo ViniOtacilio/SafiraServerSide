@@ -42,7 +42,12 @@ const deleteCard = async (req, res, next) => {
 
 const getCard = async (req, res, next) => {
    
-    const { user_id, card_name, card_id } = req.body;
+    //const { user_id, card_name, card_id } = req.body;
+
+    const user_id = req.query.user_id;
+    const card_name = req.query.card_name;
+    const card_id = req.query.card_id;
+
 
     console.log('controller: ' + user_id + ' | ' + card_name + ' | ' + card_id)
 
