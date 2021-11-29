@@ -5,7 +5,6 @@ const { deleteNewCustomCategory } = require('../services/categoriaService');
 const { getSaldo } = require('../services/categoriaService');
 const { getAllCustomCategories } = require('../services/categoriaService');
 
-
 const createCustomCategory = async (req, res, next) => {
 
     const { user_id, newCategoryName } = req.body;
@@ -64,7 +63,6 @@ const getAllCategories = async(req, res, next) => {
     }
 }
 
-
 const getCategoria = async (req, res, next) => {
 
     const user_id = req.query.user_id;
@@ -88,7 +86,6 @@ const getCategoria = async (req, res, next) => {
     }
 }
 
-
 const getCategoriaSaldo = async (req, res, next) => {
 
     const user_id = req.query.user_id;
@@ -111,7 +108,6 @@ const getCategoriaSaldo = async (req, res, next) => {
          });
     }
 }
-
 
 module.exports = {
     getAllCategories,

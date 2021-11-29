@@ -1,14 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\sessions",
     "\\src",
     "\\src\\controllers",
     "\\src\\model",
     "\\src\\routes",
     "\\src\\services",
-    "\\src\\utils"
+    "\\__tests__"
   ],
-  "SelectedNode": "\\src\\utils\\passportConfig.js",
+  "SelectedNode": "\\src\\services\\lancamentoService.js",
   "PreviewInSolutionExplorer": false
 }

@@ -3,6 +3,20 @@ const { createSaldo } = require('./saldoController');
 const { createNewUser } = require('../services/registerService');
 
 const createUser =  (req, res, next) => {
+    // #swagger.start
+    
+     /*
+         #swagger.path = '/forcedEndpoint/{id}'
+         #swagger.method = 'put'
+         #swagger.description = 'Forced endpoint.'
+         #swagger.produces = ['application/json']
+     */
+     
+     /*  #swagger.parameters['id'] = {
+             in: 'path',
+             type: 'integer',
+             description: 'User ID.' } */
+    // #swagger.end
     const { name, email, password, repeatedPassword } = req.body;
     let loginUser =  setTimeout(function () {
         passport.authenticate("local", function (err, user, info) {
@@ -16,16 +30,17 @@ const createUser =  (req, res, next) => {
                 if (error) return next(error);
                 res.status(200).json({userId: req.user.user_id, userName: req.user.username});
                 console.log(req.user);
-              //   console.log(req.headers.cookie);
-              //   console.log("Request Login supossedly successful " + req.isAuthenticated() + req.user.user_id + req.session.id);
+
             });
-            // res.redirect('/');
             createSaldo(req.user.user_id);
         })(req, res, next);
-    }, 3000);
+    }, 5000);
 
     try {
+        console.log(name,email,password,repeatedPassword);
+        // createNewUser(name, email, password, repeatedPassword).then(loginUser);
         createNewUser(name, email, password, repeatedPassword).then(loginUser);
+
     }
     catch(e) {
         return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o novo usuario' } });

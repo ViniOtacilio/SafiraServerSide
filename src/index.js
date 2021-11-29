@@ -4,15 +4,14 @@ const app = express();
 const routes = require("./routes/router");
 const cron = require('node-cron');
 var cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./openApiDocumentation/openApiDocumentation');
 
 const passport = require("passport");
 const session = require("express-session");
 const initializePassport = require("./utils/passportConfig.js");
 const FileStore = require('session-file-store')(session);
 const { pool } = require("./database.js");
-const { teste } = require("./controllers/lancamentoController.js");
-
-
 
 cors({ credentials: true, origin: true });
 app.use(express.urlencoded({ extended: true }));
@@ -76,22 +75,20 @@ app.use("/api", routes);
 app.get("/", (req, res) => {
     return res.json({ message: "Server is up " + req.isAuthenticated()});
 });
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
-//Repetição mensal de lançamentos
-cron.schedule('0 0 1 * *', function () {
-  pool.query(
-        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE repetido = true`,
-        (err, result) => {
-            if (err) {
-                throw err;
-            }
-        }
-    )
-});
 
-cron.schedule('0 0 1 * *', function () {
+//Lancamentos parcelados e recorrentes
+cron.schedule('0 1 * * *', function () {
+    var currentDate = new Date();
+    var currentDay = currentDate.getUTCDate();
+    console.log(currentDay);
+    //Lancamentos parcelados
     pool.query(
-        `UPDATE lancamentos SET qtd_parcelas=qtd_parcelas-1 WHERE parcelado = true AND qtd_parcelas > 1`,
+        `UPDATE lancamentos SET qtd_parcelas=qtd_parcelas-1 WHERE parcelado = true AND qtd_parcelas > 1 AND dia_cobranca = $1`,
+        [
+            currentDay
+        ],
         (err, result) => {
             if (err) {
                 throw err;
@@ -100,7 +97,22 @@ cron.schedule('0 0 1 * *', function () {
     )
 
     pool.query(
-        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario, FROM lancamentos WHERE parcelado = true AND qtd_parcelas > 1`,
+        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE parcelado = true AND qtd_parcelas > 1 AND dia_cobranca = $1`,
+        [
+            currentDay
+        ],
+        (err, result) => {
+            if (err) {
+                throw err;
+            }
+        }
+    )
+    //Lancamentos recorrentes
+    pool.query(
+        `INSERT INTO lancamentos (value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario) SELECT value,tipo_de_transacao,userid,categoriaid,titulo_lancamento,comentario FROM lancamentos WHERE repetido = true and dia_cobranca = $1`,
+        [
+            currentDay
+        ],
         (err, result) => {
             if (err) {
                 throw err;

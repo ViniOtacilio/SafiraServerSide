@@ -5,12 +5,21 @@
   "main": "index.js",
   "scripts": {
     "start": "node.index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "swagger-autogen": "node swagger.js",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
     "@sendgrid/mail": "^7.4.5",
+    "babel": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -25,6 +34,15 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^8.6.0",
-    "session-file-store": "^1.5.0"
+    "session-file-store": "^1.5.0",
+    "swagger-autogen": "^2.11.1",
+    "swagger-ui-express": "^4.1.6",
+    "@types/jest": "^27.0.2",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6"
   }
 }

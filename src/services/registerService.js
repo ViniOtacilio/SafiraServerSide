@@ -7,7 +7,6 @@ const createNewUser = async (name, email, password, repeatedPassword) => {
     if (!name || !email || !password || !repeatedPassword) {
     errors.push({ message: "Por favor preencha todos os campos!" });
   }
-
   if (password.length < 6) {
     errors.push({ message: "Sua senha deve ser maior que 6 caracteres." });
   }
@@ -17,9 +16,10 @@ const createNewUser = async (name, email, password, repeatedPassword) => {
   }
 
   if (errors.length > 0) {
+    console.log(errors);
     throw errors;
   } else {
-    let hashedPassword = await bcrypt.hash(password, 10);
+    let hashedPassword = await bcrypt.hash(password, 8);
     // Criando usuário no banco
     registerNewUserQuery.registerNewUser(name, email, hashedPassword);
   }
