@@ -7,13 +7,14 @@ const createLancamento = async (req, res, next) => {
 
     const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id} = req.body;
 
+    console.log(req.body);
     console.log("Dentro do Controller de createlancamento:" +  value + " | " + 
     tipo_de_transacao + " | " +  userid + " | " +  categoriaid+ " | " +  titulo_lancamento  + " | " +  comentario + " | " + 
     is_repetitivo + " | " +  is_parcelado + " | " +  qtd_parcelas + " | " +  dia_cobranca + " | " +  card_id);
 
     try {
         await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id);
-        return res.status(201);
+        res.status(201);
         next();
     }
     catch (e) {
@@ -29,12 +30,11 @@ const deleteLancamento = async (req, res, next) => {
 
     try {
         await deleteNewLancamento(id);
-        return res.status(200).send({ message: "Lancamento deletado"});
+        res.status(200).send({ message: "Lancamento deletado"});
         next();
     }
     catch (e) {
         return res.status(500).send({ success: false, error: { message: e } });
-        console.log(e);
     }
 }
 

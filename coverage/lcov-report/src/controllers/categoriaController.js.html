@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/services/cardService.js</title>
+    <title>Code coverage report for src/controllers/categoriaController.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/services</a> cardService.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controllers</a> categoriaController.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">31.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/48</span>
+                <span class='fraction'>20/64</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>20/24</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">31.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/48</span>
+                <span class='fraction'>20/64</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -165,73 +165,57 @@
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -239,149 +223,195 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { createNewCardQuery } = require("../model/cardQuery");
-const { deleteNewCardQuery } = require('../model/cardQuery');
-const { getCardQuery } = require('../model/cardQuery');
-const { alterCardQuery } = require('../model/cardQuery');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { getCategories } = require('../services/categoriaService'); 
+const { getCategoriaByUser } = require('../services/categoriaService');
+const { createNewCustomCategory } = require('../services/categoriaService');
+const { deleteNewCustomCategory } = require('../services/categoriaService');
+const { getSaldo } = require('../services/categoriaService');
+const { getAllCustomCategories } = require('../services/categoriaService');
 &nbsp;
+const createCustomCategory = async (req, res, next) =&gt; {
 &nbsp;
-const createNewCard = async (
-  user_id,
-  card_name
-) =&gt; {
-  let errors = [];
+    const { user_id, newCategoryName } = req.body;
 &nbsp;
-  if (!user_id) {
-    errors.push({ message: "Sem id de usuário" });
-  }
-  if (!card_name) {
-    errors.push({ message: "Sem nome do cartão" });
-  }
-&nbsp;
-  if (errors.length &gt; 0) {
-    console.log(errors)
-    throw errors;
-  } 
-  else {
-    await createNewCardQuery(
-        user_id,
-        card_name
-      );
-&nbsp;
-&nbsp;
-  }
-};
-&nbsp;
-const deleteNewCard = async (user_id, card_name) =&gt; {
-    let errors = [];
-   
-    if (!user_id) {
-        
-        errors.push({ message: "Sem id de usuário" });
-      }
-      console.log('40')
-      if (!card_name) {
-       
-        errors.push({ message: "Sem nome do cartão" });
-      }
-     
-      if (errors.length &gt; 0) {
-        console.log(errors)
-        throw errors;
-      } 
-    else {
-        
-        await deleteNewCardQuery(
-            user_id,
-            card_name
-          );
+    try {
+        await createNewCustomCategory(user_id, newCategoryName);
+        res.status(201);
+        next();
     }
-    
+    catch (e) {
+        console.log('erro CATEGORIA: ' + e);
+        return res.status(500).send({ success: false, error: { message: e } });
+    }
 }
 &nbsp;
-const getNewCard = <span class="fstat-no" title="function not covered" >as</span>ync (user_id, card_name, card_id) =&gt; {
-    let errors = <span class="cstat-no" title="statement not covered" >[];</span>
+const deleteCustomCategory = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!user_id) {</span>
-<span class="cstat-no" title="statement not covered" >        errors.push({ message: "Sem id de usuário" });</span>
+    const id  = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        await deleteNewCustomCategory(id);</span>
+<span class="cstat-no" title="statement not covered" >        res.sendStatus(200);</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
     }
+    catch (e) {
+<span class="cstat-no" title="statement not covered" >        return res.status(500).send({ success: false, error: { message: e} });</span>
+<span class="cstat-no" title="statement not covered" >        console.log(e);</span>
+    }
+}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (errors.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        console.log(errors)</span>
-<span class="cstat-no" title="statement not covered" >        throw errors;</span>
-    } 
+const allCustomCategories = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      data = await getCardQuery( user_id, card_name, card_id);</span>
+    const user_id = <span class="cstat-no" title="statement not covered" >req.query.user_id;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        let customCategories = <span class="cstat-no" title="statement not covered" >await getAllCustomCategories(user_id);</span>
+<span class="cstat-no" title="statement not covered" >        res.send(customCategories);</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+    }
+    catch (e) {
+<span class="cstat-no" title="statement not covered" >        return res.status(500).send({ success: false, error: { message: e} });</span>
+    }
+}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return data;</span>
+const getAllCategories = <span class="fstat-no" title="function not covered" >as</span>ync(req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        let categories = <span class="cstat-no" title="statement not covered" >await getCategories();</span>
+<span class="cstat-no" title="statement not covered" >        console.log(categories);</span>
+        // res.send(categories);
+<span class="cstat-no" title="statement not covered" >        res.sendStatus(200).send(categories)</span>
+        // res.sendStatus(201);
+<span class="cstat-no" title="statement not covered" >        next();</span>
+    }
+    catch (e) {
+<span class="cstat-no" title="statement not covered" >        console.log(e);</span>
+<span class="cstat-no" title="statement not covered" >        res.sendStatus(500);</span>
+    }
+}
 &nbsp;
-};   
+const getCategoria = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
 &nbsp;
-const alterCardName = async (user_id, card_name, new_card_name) =&gt; {
-  let errors = [];
+    const user_id = <span class="cstat-no" title="statement not covered" >req.query.user_id;</span>
+    const start_date = <span class="cstat-no" title="statement not covered" >req.query.start_date;</span>
+    const end_date = <span class="cstat-no" title="statement not covered" >req.query.end_date;</span>
 &nbsp;
-  if (!user_id) {
-      errors.push({ message: "Sem id de usuário"});
-  }
-  if (!card_name) {
-    errors.push({ message: "Sem nome do cartão"});
-  }
-  if (!new_card_name) {
-    errors.push({ message: "Sem novo nome do cartão"});
-  }
+<span class="cstat-no" title="statement not covered" >    console.log("Dentro do Controller de getlancamento:" + user_id + "-" + start_date + "-" + end_date);</span>
 &nbsp;
-  if (errors.length &gt; 0) {
-      console.log(errors)
-      throw errors;
-  } 
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        result = await getCategoriaByUser( user_id, start_date, end_date)</span>
+<span class="cstat-no" title="statement not covered" >        console.log('controller:');</span>
+<span class="cstat-no" title="statement not covered" >        console.log(result);</span>
+<span class="cstat-no" title="statement not covered" >        res.send(result);</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+    }
+    catch (e) { 
+<span class="cstat-no" title="statement not covered" >        console.log(e)</span>
+<span class="cstat-no" title="statement not covered" >        res.send({</span>
+            message:e
+         });
+    }
+}
 &nbsp;
-    data = await alterCardQuery( user_id, card_name, new_card_name );
+const getCategoriaSaldo = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
 &nbsp;
-    return data;
+    const user_id = <span class="cstat-no" title="statement not covered" >req.query.user_id;</span>
+    const start_date = <span class="cstat-no" title="statement not covered" >req.query.start_date;</span>
+    const end_date = <span class="cstat-no" title="statement not covered" >req.query.end_date;</span>
 &nbsp;
-};   
+<span class="cstat-no" title="statement not covered" >    console.log("Dentro do Controller de getCategoriaSaldo:" + user_id + "-" + start_date + "-" + end_date);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        result = await getSaldo( user_id, start_date, end_date)</span>
+<span class="cstat-no" title="statement not covered" >        console.log('controller:');</span>
+<span class="cstat-no" title="statement not covered" >        console.log(result);</span>
+<span class="cstat-no" title="statement not covered" >        res.send(result);</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+    }
+    catch (e) { 
+<span class="cstat-no" title="statement not covered" >        console.log(e)</span>
+<span class="cstat-no" title="statement not covered" >        res.send({</span>
+            message:e
+         });
+    }
+}
 &nbsp;
 module.exports = {
-    createNewCard,
-    deleteNewCard,
-    getNewCard,
-    alterCardName
-};
-&nbsp;</pre></td></tr></table></pre>
+    getAllCategories,
+    getCategoria,
+    createCustomCategory,
+    deleteCustomCategory,
+    getCategoriaSaldo,
+    allCustomCategories
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

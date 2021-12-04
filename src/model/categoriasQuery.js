@@ -53,23 +53,48 @@ const getAllCustomCategoriesQuery = async (user_id) => {
   });
 };
 
-
-const getCategoriaQuery = async () => {
-    let cloneArray;
-    pool.query(
-    `SELECT * FROM categoria`,
-    (err, result) => {
-      if (err) {
-        throw err;
+const getCategoriaQuery = async (user_id) => {
+  return new Promise(function(resolve, reject) {
+  pool.query(
+      `SELECT * FROM categoria WHERE
+       user_id = $1 OR user_id IS Null `,
+      [
+        user_id
+      ],
+      (err, result) => {
+          if (err) {
+              throw err;
+          }
+          else {
+            console.log(result.rows);
+            let cloneArray = JSON.parse(JSON.stringify(result.rows));
+            resolve(cloneArray);
+          }
       }
-      else {
-      cloneArray = JSON.parse(JSON.stringify(result.rows));
-      return cloneArray;
-    }
 
-    }
-  );
+  )
+  });
 };
+
+
+// const getCategoriaQuery = async (user_id) => {
+//    let query = "SELECT * FROM categoria WHERE user_id = "+user_id;
+//     let cloneArray;
+//     pool.query(query,
+//     (err, result) => {
+//       if (err) {
+//         console.log('deu erro');
+//         throw err;
+//       }
+//       else {
+//       cloneArray = JSON.parse(JSON.stringify(result.rows));
+//       console.log('deu certo');
+//       return cloneArray;
+//     }
+
+//     }
+//   );
+// };
 
 const getCategoriaByUserQuery = async (query) => {
   return new Promise(function(resolve, reject) {
