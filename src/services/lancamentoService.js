@@ -22,13 +22,13 @@ const createNewLancamento = async (
     }
 
     if (typeof is_repetitivo != 'undefined'){
-        console.log(is_repetitivo)
+        //console.log(is_repetitivo)
         if (is_repetitivo != "false" && is_repetitivo != "true"){
             throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" 
         }
 
         if (typeof dia_cobranca != 'undefined'){
-            console.log(dia_cobranca)
+            //console.log(dia_cobranca)
             if (Number.isInteger(dia_cobranca) != true){
                 throw "Por favor preencha o campo de dia_cobranca com um número válido"
             }

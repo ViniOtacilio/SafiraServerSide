@@ -2,7 +2,7 @@ const { pool } = require("../database.js");
 
 const registerNewUser = (name, email, hashedPassword) => {
 
-    
+    let errors = [];
   // Checa se há um usuário com o mesmo email
   pool.query(
     `SELECT * FROM users

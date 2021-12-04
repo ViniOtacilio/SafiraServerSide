@@ -39,8 +39,9 @@ var express = require("express");
 var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-var createCard = require("../src/controllers/cardController.js").createCard;
-var deleteCard = require("../src/controllers/cardController.js").deleteCard;
+var createCard = require("../../src/controllers/cardController.js").createCard;
+var deleteCard = require("../../src/controllers/cardController.js").deleteCard;
+var alterCard = require("../../src/controllers/cardController.js").alterCard;
 describe("Teste criacao card, caso ideal", function () {
     test("Deve retornar 201", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
@@ -169,6 +170,74 @@ describe("Teste deletar card, caso erro", function () {
                     next = function () { };
                     output = 500;
                     return [4 /*yield*/, deleteCard(req, res, next)];
+                case 1:
+                    _a.sent();
+                    expect(res._status).toEqual(output);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
+describe("Teste alterar card, caso ideal", function () {
+    test("Deve retornar 200", function () { return __awaiter(_this, void 0, void 0, function () {
+        var req, res, next, output;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    req = {
+                        body: {
+                            user_id: 19,
+                            card_name: 'teste',
+                            new_card_name: 'teste2'
+                        },
+                    };
+                    res = {
+                        _status: null,
+                        _json: null,
+                        status: function (code) {
+                            this._status = code;
+                            return this;
+                        },
+                        send: function (json) {
+                            this._json = json;
+                            return this;
+                        }
+                    };
+                    next = function () { };
+                    output = 200;
+                    return [4 /*yield*/, alterCard(req, res, next)];
+                case 1:
+                    _a.sent();
+                    expect(res._status).toEqual(output);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
+describe("Teste alterar card, caso erro", function () {
+    test("Deve retornar 500", function () { return __awaiter(_this, void 0, void 0, function () {
+        var req, res, next, output;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    req = {
+                        body: {},
+                    };
+                    res = {
+                        _status: null,
+                        _json: null,
+                        status: function (code) {
+                            this._status = code;
+                            return this;
+                        },
+                        send: function (json) {
+                            this._json = json;
+                            return this;
+                        }
+                    };
+                    next = function () { };
+                    output = 500;
+                    return [4 /*yield*/, alterCard(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);

@@ -3,8 +3,8 @@ var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const { createLancamento } = require("../src/controllers/lancamentoController.js");
-const { deleteLancamento } = require("../src/controllers/lancamentoController.js");
+const { createLancamento } = require("../../src/controllers/lancamentoController.js");
+const { deleteLancamento } = require("../../src/controllers/lancamentoController.js");
 
 
 describe("Teste criacao lancamento, caso ideal",  () => {
