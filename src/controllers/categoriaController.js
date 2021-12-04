@@ -11,12 +11,12 @@ const createCustomCategory = async (req, res, next) => {
 
     try {
         await createNewCustomCategory(user_id, newCategoryName);
-        res.sendStatus(201);
+        res.status(201);
         next();
     }
     catch (e) {
+        console.log('erro CATEGORIA: ' + e);
         return res.status(500).send({ success: false, error: { message: e } });
-        console.log(e);
     }
 }
 

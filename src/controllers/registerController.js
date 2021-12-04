@@ -42,8 +42,8 @@ const createUser =  (req, res, next) => {
         createNewUser(name, email, password, repeatedPassword).then(loginUser);
 
     }
-    catch(e) {
-        return res.status(500).send({ success: false, error: { message: 'Nao foi possivel criar o novo usuario' } });
+    catch (e) {
+        return res.status(500).send({ success: false, error: { message: e } });
     }
 }
 

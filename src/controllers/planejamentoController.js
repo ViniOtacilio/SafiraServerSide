@@ -3,16 +3,17 @@ const { deleteNewPlanejamento } = require('../services/planejamentoService');
 const { getPlanejamentoMensal } = require('../services/planejamentoService');
 
 const createPlanejamento = async (req, res, next) => {
-    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-    const { plans } = req.body;
+    const plans = req.body;
+    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
-    for(let plan of plans){
-
-        if("user_id" in plan == false | "mes" in plan == false |"categoria_id" in plan == false |"value" in plan == false){
+    for (let plan of plans) {
+        
+      
+        if (plan.user_id == null || plan.mes == null || plan.categoria_id == null || plan.value == null) {
             return res.status(500).send({ success: false, error: { message: 'Dados insuficientes para a criação do planejamento' }});
         }
 
-        if(months.indexOf(plan.mes.split('-')[0]) == -1){
+        if (months.indexOf(plan.mes.split('-')[0]) == -1) {
             return res.status(500).send({ success: false, error: { message: 'mês inválido' }});
         }
 
@@ -23,7 +24,7 @@ const createPlanejamento = async (req, res, next) => {
             return res.status(500).send({ success: false, error: { message: 'ano inválido' }});
             }
         }
-        else{
+        else {
             return res.status(500).send({ success: false, error: { message: 'mes inválido, não contém o ano' }});
         }
 
@@ -37,20 +38,21 @@ const createPlanejamento = async (req, res, next) => {
 
     }
     
-    return res.sendStatus(201)
+    return res.status(201)
 
 }
 
 const deletePlanejamento = async (req, res, next) => {
 
-    const { plan } = req.body;
-
+    const plan = req.body;
+    console.log('entrou delete' + plan.user_id);
     try {
         await deleteNewPlanejamento(plan.user_id, plan.mes, plan.categoria_id);
         res.status(200).send({ message: "Planejamento deletado"});
         next();
     }
     catch (e) {
+        console.log("ERRO: " + e);
         return res.status(500).send({ success: false, error: { message: e } });
     }
 }

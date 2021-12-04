@@ -39,9 +39,9 @@ var express = require("express");
 var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-var createLancamento = require("../src/controllers/lancamentoController.js").createLancamento;
-var deleteLancamento = require("../src/controllers/lancamentoController.js").deleteLancamento;
-describe("Teste criacao lancamento, caso ideal", function () {
+var createCustomCategory = require("../../src/controllers/categoriaController.js").createCustomCategory;
+var deleteCustomCategory = require("../../src/controllers/categoriaController.js").deleteCustomCategory;
+describe("Teste criacao categoria, caso ideal", function () {
     test("Deve retornar 201", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
@@ -49,12 +49,8 @@ describe("Teste criacao lancamento, caso ideal", function () {
                 case 0:
                     req = {
                         body: {
-                            value: 100,
-                            tipo_de_transacao: 1,
-                            userid: 19,
-                            categoriaid: 1,
-                            titulo_lancamento: 'Salario',
-                            comentario: 'teste'
+                            user_id: 19,
+                            newCategoryName: 'teste'
                         },
                     };
                     res = {
@@ -71,7 +67,7 @@ describe("Teste criacao lancamento, caso ideal", function () {
                     };
                     next = function () { };
                     output = 201;
-                    return [4 /*yield*/, createLancamento(req, res, next)];
+                    return [4 /*yield*/, createCustomCategory(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -80,16 +76,14 @@ describe("Teste criacao lancamento, caso ideal", function () {
         });
     }); });
 });
-describe("Teste criacao lancamento, caso erro", function () {
+describe("Teste criacao categoria, caso erro", function () {
     test("Deve retornar 500", function () { return __awaiter(_this, void 0, void 0, function () {
         var req, res, next, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     req = {
-                        body: {
-                        //body vazio deve retornar erro
-                        },
+                        body: {},
                     };
                     res = {
                         _status: null,
@@ -105,7 +99,7 @@ describe("Teste criacao lancamento, caso erro", function () {
                     };
                     next = function () { };
                     output = 500;
-                    return [4 /*yield*/, createLancamento(req, res, next)];
+                    return [4 /*yield*/, createCustomCategory(req, res, next)];
                 case 1:
                     _a.sent();
                     expect(res._status).toEqual(output);
@@ -114,70 +108,4 @@ describe("Teste criacao lancamento, caso erro", function () {
         });
     }); });
 });
-describe("Teste deletar lancamento, caso ideal", function () {
-    test("Deve retornar 200", function () { return __awaiter(_this, void 0, void 0, function () {
-        var req, res, next, output;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    req = {
-                        params: {
-                            id: 1
-                        },
-                    };
-                    res = {
-                        _status: null,
-                        _json: null,
-                        status: function (code) {
-                            this._status = code;
-                            return this;
-                        },
-                        send: function (json) {
-                            this._json = json;
-                            return this;
-                        }
-                    };
-                    next = function () { };
-                    output = 200;
-                    return [4 /*yield*/, deleteLancamento(req, res, next)];
-                case 1:
-                    _a.sent();
-                    expect(res._status).toEqual(output);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-});
-describe("Teste deletar lancamento, caso erro", function () {
-    test("Deve retornar 500", function () { return __awaiter(_this, void 0, void 0, function () {
-        var req, res, next, output;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    req = {
-                        params: {},
-                    };
-                    res = {
-                        _status: null,
-                        _json: null,
-                        status: function (code) {
-                            this._status = code;
-                            return this;
-                        },
-                        send: function (json) {
-                            this._json = json;
-                            return this;
-                        }
-                    };
-                    next = function () { };
-                    output = 500;
-                    return [4 /*yield*/, deleteLancamento(req, res, next)];
-                case 1:
-                    _a.sent();
-                    expect(res._status).toEqual(output);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-});
-//# sourceMappingURL=testesLancamento.spec.js.map
+//# sourceMappingURL=testesCategoria.js.map

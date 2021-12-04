@@ -21,14 +21,14 @@ const createNewLancamento = async (
     throw "Por favor preencha todos os campos obrigatórios(value, tipo_de_transacao e userid)!"
     }
 
-    if (typeof is_repetitivo == 'undefined'){
+    if (typeof is_repetitivo == undefined){
         console.log(is_repetitivo)
         if (is_repetitivo != false && is_repetitivo != true){
             throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" 
         }
 
         if (typeof dia_cobranca != 'undefined'){
-            console.log(dia_cobranca)
+            //console.log(dia_cobranca)
             if (Number.isInteger(dia_cobranca) != true){
                 throw "Por favor preencha o campo de dia_cobranca com um número válido"
             }

@@ -15,16 +15,17 @@ const createNewUser = async (name, email, password, repeatedPassword) => {
     errors.push({ message: "A senha repetida está incorreta." });
   }
 
-  if (errors.length > 0) {
-    console.log(errors);
-    throw errors;
-  } else {
-    let hashedPassword = await bcrypt.hash(password, 8);
+    if (errors.length > 0) {
+        console.log(errors);
+        throw errors;
+    }
+    else {
+    let hashedPassword = await bcrypt.hash(password, 10);
     // Criando usuário no banco
     registerNewUserQuery.registerNewUser(name, email, hashedPassword);
   }
 };
 
 module.exports = {
-  createNewUser,
+  createNewUser
 };

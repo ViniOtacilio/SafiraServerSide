@@ -4,7 +4,9 @@ const createNewPlanejamentoQuery = async (user_id, mes, categoria_id, value) => 
 
     return new Promise(function(resolve, reject) {
         pool.query(`INSERT INTO planejamento(user_id, mes, categoria_id, value)
-        values($1,$2,$3,$4)`,
+        values($1,$2,$3,$4) ON CONFLICT ON CONSTRAINT unique_constraint DO UPDATE SET value=$4;
+
+`,
        [
            user_id,
            mes,

@@ -5,6 +5,10 @@ const createNewPlanejamento = async (user_id, mes, categoria_id, value) => {
 }
 
 const deleteNewPlanejamento = async (user_id, mes, categoria_id) => {
+
+    if (user_id == null || mes == null || categoria_id == null) {
+        throw "Dados insuficientes";
+    }
     planejamentoQuery.deleteNewPlanejamentoQuery(user_id, mes, categoria_id);
 
 }

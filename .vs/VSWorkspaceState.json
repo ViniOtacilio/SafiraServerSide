@@ -6,8 +6,11 @@
     "\\src\\model",
     "\\src\\routes",
     "\\src\\services",
-    "\\__tests__"
+    "\\__tests__",
+    "\\__tests__\\testesCard",
+    "\\__tests__\\testesCategorias",
+    "\\__tests__\\testesLancamento"
   ],
-  "SelectedNode": "\\src\\services\\lancamentoService.js",
+  "SelectedNode": "\\__tests__\\testesLancamento",
   "PreviewInSolutionExplorer": false
 }
