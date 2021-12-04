@@ -7,6 +7,7 @@ const createLancamento = async (req, res, next) => {
 
     const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id} = req.body;
 
+    console.log(req.body);
     console.log("Dentro do Controller de createlancamento:" +  value + " | " + 
     tipo_de_transacao + " | " +  userid + " | " +  categoriaid+ " | " +  titulo_lancamento  + " | " +  comentario + " | " + 
     is_repetitivo + " | " +  is_parcelado + " | " +  qtd_parcelas + " | " +  dia_cobranca + " | " +  card_id);

@@ -36,11 +36,12 @@ const deleteCustomCategory = async (req, res, next) => {
 }
 
 const allCustomCategories = async (req, res, next) => {
-
     const user_id = req.query.user_id;
     try {
+        console.log('alo')
         let customCategories = await getAllCustomCategories(user_id);
         res.send(customCategories);
+        console.log(customCategories);
         next();
     }
     catch (e) {
@@ -49,11 +50,11 @@ const allCustomCategories = async (req, res, next) => {
 }
 
 const getAllCategories = async(req, res, next) => {
+    const user_id = req.query.user_id;
     try {
-        let categories = await getCategories();
-        console.log(categories);
-        // res.send(categories);
-        res.sendStatus(200).send(categories)
+        let categories = await getCategories(user_id);
+        res.send(categories);
+        //res.sendStatus(200).send(categories)
         // res.sendStatus(201);
         next();
     }

@@ -12,6 +12,7 @@ const createCard = async (req, res, next) => {
 
     try {
         await createNewCard(user_id, card_name);
+        return res.status(200);
     }
     catch (e) {
         console.log("ERRO: "+ e);

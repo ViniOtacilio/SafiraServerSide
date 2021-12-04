@@ -16,11 +16,13 @@ const getAllCustomCategories = async (user_id) => {
     return data;
 }
 
-const getCategories = async () => {
+const getCategories = async (user_id) => {
   let errors = [];
-
+    let categoria = await getCategoriaQuery.getCategoriaQuery(user_id);
+    console.log('CATEGORIASSS');
+    console.log(categoria);
     // Retornando categorias
-    getCategoriaQuery.getCategoriaQuery();
+    return categoria;
 
 };
 

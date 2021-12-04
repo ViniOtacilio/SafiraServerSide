@@ -21,9 +21,9 @@ const createNewLancamento = async (
     throw "Por favor preencha todos os campos obrigatórios(value, tipo_de_transacao e userid)!"
     }
 
-    if (typeof is_repetitivo != 'undefined'){
+    if (typeof is_repetitivo == 'undefined'){
         console.log(is_repetitivo)
-        if (is_repetitivo != "false" && is_repetitivo != "true"){
+        if (is_repetitivo != false && is_repetitivo != true){
             throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" 
         }
 
@@ -46,9 +46,9 @@ const createNewLancamento = async (
         is_repetitivo = 'false'
     }
 
-    if (typeof is_parcelado != 'undefined'){
+    if (typeof is_parcelado == undefined){
         console.log(is_parcelado)
-        if (is_parcelado != 'false' && is_parcelado != 'true'){
+        if (is_parcelado != false && is_parcelado != true){
             throw "Por favor preencha o campo de parcelamento com um valor válido 'false' ou 'true'!"
         }
 
