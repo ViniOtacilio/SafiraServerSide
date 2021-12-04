@@ -36,7 +36,7 @@ router.get('/deleteLancamento/:id', deleteLancamento);
 router.get('/categorias/saldo', getCategoriaSaldo);
 router.get('/categorias/getCustomCategories', allCustomCategories);
 router.post('/planejamento/createPlanejamento', createPlanejamento);
-router.get('/planejamento/deletePlanejamento', deletePlanejamento);
+router.post('/planejamento/deletePlanejamento', deletePlanejamento);
 router.get('/planejamento/getPlanejamento', getPlanejamento);
 router.post('/cards/createCard', createCard);
 router.post('/cards/deleteCard', deleteCard);
