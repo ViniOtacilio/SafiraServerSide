@@ -16,7 +16,7 @@ const createNewLancamento = async (
   dia_cobranca, 
   card_id
 ) => {
-
+    console.log("De agora" + is_parcelado, qtd_parcelas)
     if (!value || !tipo_de_transacao || !userid) {
     throw "Por favor preencha todos os campos obrigatórios(value, tipo_de_transacao e userid)!"
     }
@@ -47,7 +47,6 @@ const createNewLancamento = async (
     }
 
     if (typeof is_parcelado == undefined){
-        console.log(is_parcelado)
         if (is_parcelado != false && is_parcelado != true){
             throw "Por favor preencha o campo de parcelamento com um valor válido 'false' ou 'true'!"
         }
@@ -80,9 +79,6 @@ const createNewLancamento = async (
         throw "Para criar um lançamento parcelado é necessário a quantidade de parcelas"
     }
 
-    }
-    else{
-        is_parcelado = 'false'
     }
 
     //Criando novo lançamento no banco de dados
