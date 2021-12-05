@@ -325,7 +325,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
         }
     }
 
-    new_data.push({'total':total})
+    new_data[new_data.length - 1]['total'] = total
 
     return new_data;
 
