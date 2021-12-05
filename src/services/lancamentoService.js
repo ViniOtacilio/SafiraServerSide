@@ -248,22 +248,24 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
       }
     }
 
-    console.log(base_query)
+    //console.log("query enviada para o model  " + base_query)
 
     start_date = Date.parse(start_date)
     end_date = Date.parse(end_date)
-    cur_date = new Date()
+    let cur_date = new Date()
 
-    new_data = []
+    let new_data = []
+    
+    let data = await getLancamentoQuery( base_query );
 
-    data = await getLancamentoQuery( base_query );
+    //new_data = [];
 
-    total = 0
+    let total = 0
 
     for(i=0; i<data.length;i++){
         if(data[i].parcelado == true){
             const lancamento = JSON.parse(JSON.stringify(data[i]))
-
+            
             var parcelas = lancamento.qtd_parcelas
             var data_lanc = new Date(Date.parse(lancamento.data_lancamento))
             var value = lancamento.value
@@ -326,6 +328,10 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
     }
 
     new_data[new_data.length - 1]['total'] = total
+
+    // console.log(data);
+    // console.log('O que retorna exatamente da query:  ' + JSON.parse(JSON.stringify(data)))
+    console.log(new_data);
 
     return new_data;
 

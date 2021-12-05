@@ -59,6 +59,7 @@ const deleteNewLancamentoQuery = async (id) => {
 const getLancamentoQuery = async (query) => {
     return new Promise(function(resolve, reject) {
       pool.query(query, (err, result) => {
+        //console.log("Query recebida pelo model  " + query);
         if (err) {
           reject (err) ;
         }
