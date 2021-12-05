@@ -14,7 +14,7 @@ const createLancamento = async (req, res, next) => {
 
     try {
         await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id);
-        return res.status(201);
+        res.status(200).send({ message: 'Lançamento criado'});
         next();
     }
     catch (e) {

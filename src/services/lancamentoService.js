@@ -82,7 +82,7 @@ const createNewLancamento = async (
     }
 
     //Criando novo lançamento no banco de dados
-    await registerNewLancamentoQuery.createNewLancamentoQuery(
+    return await registerNewLancamentoQuery.createNewLancamentoQuery(
     value,
     tipo_de_transacao,
     userid,
