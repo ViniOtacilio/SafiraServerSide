@@ -258,6 +258,8 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
 
     data = await getLancamentoQuery( base_query );
 
+    total = 0
+
     for(i=0; i<data.length;i++){
         if(data[i].parcelado == true){
             const lancamento = JSON.parse(JSON.stringify(data[i]))
@@ -292,6 +294,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
             if(Number.isNaN(start_date) == false && Number.isNaN(end_date) == false){
 
                 if(last_parcela_date >= start_date && last_parcela_date <= end_date){
+                    total = parseFloat(data[i].value) + total
                     new_data.push(data[i])
                 }
             }
@@ -299,25 +302,30 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
                 if(Number.isNaN(start_date) == false){
 
                     if(last_parcela_date >= start_date){
+                        total = parseFloat(data[i].value) + total
                         new_data.push(data[i])
                     }
                 }
                 if(Number.isNaN(end_date) == false){
 
                     if(last_parcela_date <= end_date){
+                        total = parseFloat(data[i].value) + total
                         new_data.push(data[i])
                     }
                 }
                 if(Number.isNaN(start_date) == true && Number.isNaN(end_date) == true){
-
+                    total = parseFloat(data[i].value) + total
                     new_data.push(data[i])
                 }
             }
         }
         else{
+            total = parseFloat(data[i].value) + total
             new_data.push(data[i])
         }
     }
+
+    new_data.push({'total':total})
 
     return new_data;
 
