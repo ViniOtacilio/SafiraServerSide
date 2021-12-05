@@ -13,7 +13,7 @@ const createNewLancamento = async (
   is_repetitivo,
   is_parcelado,
   qtd_parcelas,
-  dia_cobranca, 
+  dia_cobranca,
   card_id
 ) => {
     if (!value || !tipo_de_transacao || !userid) {
@@ -22,7 +22,7 @@ const createNewLancamento = async (
 
     if (typeof is_repetitivo == undefined){
         if (is_repetitivo != false && is_repetitivo != true){
-            throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" 
+            throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!"
         }
 
         if (typeof dia_cobranca != 'undefined'){
@@ -84,7 +84,7 @@ const createNewLancamento = async (
     is_repetitivo,
     is_parcelado,
     qtd_parcelas,
-    dia_cobranca, 
+    dia_cobranca,
     card_id
     );
 
@@ -115,7 +115,7 @@ const repeatAllLancamentos = async () => {
 }
 
 const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id, card_id) => {
-   
+
   let errors = [];
 
   var base_query = 'SELECT l.*, c.nome AS nome_categoria FROM lancamentos AS l LEFT JOIN categoria AS c ON l.categoriaid = c.id WHERE userid IN ('+user_id+')';
@@ -128,9 +128,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
       throw errors;
   } else {
 
-      if (typeof id !== 'undefined' && id){
-          base_query = base_query + ' AND l.id IN ('+id+')';
-      } 
+
 
       if (typeof status !== 'undefined' && status ){
           if(status!='0' && status!='1' && status != '0,1'){
@@ -145,7 +143,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
               values.push(str);
           }
           base_query = base_query + " AND tipo_de_transacao IN ("+values+")";
-         
+
       }
 
       if (typeof start_date !== 'undefined' && start_date){
@@ -167,7 +165,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
           }
 
           base_query = base_query + " AND date_trunc('day', data_lancamento) >= TO_DATE('"+start_date+"', 'YYYY-MM-DD')";
-          
+
       }
 
       if (typeof end_date !== 'undefined' && end_date){
@@ -189,7 +187,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
           }
 
           base_query = base_query + " AND date_trunc('day', data_lancamento) <= TO_DATE('"+end_date+"', 'YYYY-MM-DD')";
-          
+
       }
       if (typeof titulo !== 'undefined' && titulo){
           let titulos = [];
@@ -200,7 +198,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
               titulos.push(str);
           }
           base_query = base_query + " AND titulo_lancamento IN ("+titulos.join(",")+")";
-          
+
       }
 
       if (typeof categoria_id !== 'undefined' && categoria_id){
@@ -222,12 +220,15 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
             console.log(str);
             categorias.push(str);
         }
-       
+
         base_query = base_query + " AND categoriaid IN ("+categorias.join(",")+")";
-        
+
     }
 
     if (typeof card_id !== 'undefined' && card_id){
+        if (typeof id !== 'undefined' && id){
+            base_query = base_query + ' AND l.id IN ('+id+')';
+        }
         if(card_id == 'null'){
             base_query = base_query + " AND card_id IS NULL";
             base_query = base_query + " OR (userid IN ("+user_id+") AND card_id IS NULL AND parcelado IS TRUE)"
@@ -239,8 +240,12 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
             base_query = base_query + " OR (userid IN ("+user_id+") AND card_id = " + card_id + " AND repetido IS TRUE)"
         }
     }else{
+      if (typeof id !== 'undefined' && id){
+          base_query = base_query + ' AND l.id IN ('+id+')';
+      } else {
         base_query = base_query + " OR (userid IN ("+user_id+") AND parcelado IS TRUE)"
         base_query = base_query + " OR (userid IN ("+user_id+") AND repetido IS TRUE)"
+      }
     }
 
     console.log(base_query)
@@ -276,35 +281,35 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
                 first_parcela = first_parcela_day
             }
 
-            parcela_atual =  cur_date.getMonth() - first_parcela.getMonth() + 
+            parcela_atual =  cur_date.getMonth() - first_parcela.getMonth() +
             (12 * (cur_date.getFullYear() - first_parcela.getFullYear()))
 
             data[i].parcela_atual = parcela_atual
 
             last_parcela_date = first_parcela.setMonth(first_parcela.getMonth()+parcelas)
-            
+
 
             if(Number.isNaN(start_date) == false && Number.isNaN(end_date) == false){
-                
+
                 if(last_parcela_date >= start_date && last_parcela_date <= end_date){
                     new_data.push(data[i])
                 }
             }
             else{
                 if(Number.isNaN(start_date) == false){
-                    
+
                     if(last_parcela_date >= start_date){
                         new_data.push(data[i])
                     }
                 }
                 if(Number.isNaN(end_date) == false){
-                    
+
                     if(last_parcela_date <= end_date){
                         new_data.push(data[i])
                     }
                 }
                 if(Number.isNaN(start_date) == true && Number.isNaN(end_date) == true){
-                    
+
                     new_data.push(data[i])
                 }
             }
@@ -316,7 +321,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
 
     return new_data;
 
-    }    
+    }
 };
 
 module.exports = {
