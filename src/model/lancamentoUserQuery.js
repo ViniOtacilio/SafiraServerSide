@@ -62,7 +62,6 @@ const getLancamentoQuery = async (query) => {
         if (err) {
           reject (err) ;
         }
-        console.log(result)
         if(typeof result !== 'undefined' && result){
           res = result.rows
         }

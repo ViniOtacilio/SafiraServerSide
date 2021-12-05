@@ -16,19 +16,16 @@ const createNewLancamento = async (
   dia_cobranca, 
   card_id
 ) => {
-    console.log("De agora" + is_parcelado, qtd_parcelas)
     if (!value || !tipo_de_transacao || !userid) {
     throw "Por favor preencha todos os campos obrigatórios(value, tipo_de_transacao e userid)!"
     }
 
     if (typeof is_repetitivo == undefined){
-        console.log(is_repetitivo)
         if (is_repetitivo != false && is_repetitivo != true){
             throw "Por favor preencha o campo de repetição com um valor válido 'false' ou 'true'!" 
         }
 
         if (typeof dia_cobranca != 'undefined'){
-            //console.log(dia_cobranca)
             if (Number.isInteger(dia_cobranca) != true){
                 throw "Por favor preencha o campo de dia_cobranca com um número válido"
             }
@@ -42,9 +39,6 @@ const createNewLancamento = async (
         }
 
     }
-    else{
-        is_repetitivo = 'false'
-    }
 
     if (typeof is_parcelado == undefined){
         if (is_parcelado != false && is_parcelado != true){
@@ -52,7 +46,6 @@ const createNewLancamento = async (
         }
 
         if (typeof dia_cobranca != 'undefined'){
-            console.log(dia_cobranca)
             if (Number.isInteger(dia_cobranca) != true){
                 throw "Por favor preencha o campo de dia_cobranca com um número válido"
             }
@@ -66,7 +59,6 @@ const createNewLancamento = async (
         }
 
         if (typeof qtd_parcelas != 'undefined'){
-        console.log("parcelas: "+ qtd_parcelas)
         if (Number.isInteger(qtd_parcelas) != true){
             throw "Por favor preencha o campo de parcelas com um número válido"
         }
@@ -119,9 +111,7 @@ const deleteNewLancamento = async (id) => {
 }
 
 const repeatAllLancamentos = async () => {
-    console.log("entrou");
     repeateLancamentos();
-    console.log("rodou");
 }
 
 const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_date, categoria_id, card_id) => {

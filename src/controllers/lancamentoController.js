@@ -53,8 +53,6 @@ const getLancamento = async (req, res, next) => {
 
     try {
         result = await getLancamentoByUser( user_id, id, status, titulo, start_date, end_date, categoria_id, card_id)
-        console.log('controller:');
-        console.log(result);
         res.send(result);
         next();
     }
