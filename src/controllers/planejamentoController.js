@@ -5,8 +5,10 @@ const { getPlanejamentoMensal } = require('../services/planejamentoService');
 const createPlanejamento = async (req, res, next) => {
     const plans = req.body;
     months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-
-    for (let plan of plans) {
+    //console.log(plans);
+    for (let plan of plans.plans) {
+        //console.log('entrou aqui?');
+        //console.log(plan);
         
       
         if (plan.user_id == null || plan.mes == null || plan.categoria_id == null || plan.value == null) {
@@ -19,8 +21,8 @@ const createPlanejamento = async (req, res, next) => {
 
         if(plan.mes.split('-')[1]){
             if(plan.mes.split('-')[1].length != 4){
-                console.log(plan.mes.split('-')[1])
-                console.log(plan.mes.split('-')[1].length)
+                //console.log(plan.mes.split('-')[1])
+                //console.log(plan.mes.split('-')[1].length)
             return res.status(500).send({ success: false, error: { message: 'ano inválido' }});
             }
         }
@@ -45,7 +47,7 @@ const createPlanejamento = async (req, res, next) => {
 const deletePlanejamento = async (req, res, next) => {
 
     const plan = req.body;
-    console.log('entrou delete' + plan.user_id);
+
     try {
         await deleteNewPlanejamento(plan.user_id, plan.mes, plan.categoria_id);
         res.status(200).send({ message: "Planejamento deletado"});
