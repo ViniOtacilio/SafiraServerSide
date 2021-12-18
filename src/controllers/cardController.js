@@ -5,21 +5,18 @@ const { alterCardName } = require('../services/cardService');
 
 
 const createCard = async (req, res, next) => {
-    
-    const { user_id, card_name } = req.body;
 
-    console.log('controller: ' + user_id + ' | ' + card_name)
+    const { user_id, card_name } = req.body;
 
     try {
         await createNewCard(user_id, card_name);
         return res.status(200);
     }
     catch (e) {
-        console.log("ERRO: "+ e);
         return res.status(500).send({ success: false, error: { message: e } });
     }
 
-    
+
     return res.status(201);
 
 }
@@ -28,10 +25,7 @@ const deleteCard = async (req, res, next) => {
 
     const { user_id, card_name } = req.body;
 
-    console.log('controller: ' + user_id + ' | ' + card_name)
-
     try {
-        console.log('try')
         await deleteNewCard(user_id, card_name);
         res.status(200).send({ message: "Cartão deletado"});
         next();
@@ -42,19 +36,14 @@ const deleteCard = async (req, res, next) => {
 }
 
 const getCard = async (req, res, next) => {
-   
-    //const { user_id, card_name, card_id } = req.body;
 
     const user_id = req.query.user_id;
     const card_name = req.query.card_name;
     const card_id = req.query.card_id;
 
-
-    console.log('controller: ' + user_id + ' | ' + card_name + ' | ' + card_id)
-
     try {
         result = await getNewCard(user_id, card_name, card_id);
-        console.log(result);
+
         res.send(result);
         next();
     }
@@ -64,10 +53,8 @@ const getCard = async (req, res, next) => {
 }
 
 const alterCard = async (req, res, next) => {
-   
-    const { user_id, card_name, new_card_name } = req.body;
 
-    console.log('controller: ' + user_id + ' | ' + card_name + ' | ' + new_card_name)
+    const { user_id, card_name, new_card_name } = req.body;
 
     try {
         await alterCardName(user_id, card_name, new_card_name);
