@@ -1,19 +1,19 @@
-const { createNewLancamento } = require('../services/lancamentoService'); 
-const { getLancamentoByUser } = require('../services/lancamentoService'); 
-const { deleteNewLancamento } = require('../services/lancamentoService'); 
+const { createNewLancamento } = require('../services/lancamentoService');
+const { getLancamentoByUser } = require('../services/lancamentoService');
+const { deleteNewLancamento } = require('../services/lancamentoService');
 
 
 const createLancamento = async (req, res, next) => {
 
-    const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id} = req.body;
+    const { value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario, is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id, data_lancamento} = req.body;
 
     console.log(req.body);
-    console.log("Dentro do Controller de createlancamento:" +  value + " | " + 
-    tipo_de_transacao + " | " +  userid + " | " +  categoriaid+ " | " +  titulo_lancamento  + " | " +  comentario + " | " + 
-    is_repetitivo + " | " +  is_parcelado + " | " +  qtd_parcelas + " | " +  dia_cobranca + " | " +  card_id);
+    console.log("Dentro do Controller de createlancamento:" +  value + " | " +
+    tipo_de_transacao + " | " +  userid + " | " +  categoriaid+ " | " +  titulo_lancamento  + " | " +  comentario + " | " +
+    is_repetitivo + " | " +  is_parcelado + " | " +  qtd_parcelas + " | " +  dia_cobranca + " | " +  card_id + " | " +  data_lancamento);
 
     try {
-        await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id);
+        await createNewLancamento(value, tipo_de_transacao, userid, categoriaid, titulo_lancamento, comentario,  is_repetitivo, is_parcelado, qtd_parcelas, dia_cobranca, card_id, data_lancamento);
         res.status(200).send({ message: 'Lançamento criado'});
         next();
     }
@@ -56,7 +56,7 @@ const getLancamento = async (req, res, next) => {
         res.send(result);
         next();
     }
-    catch (e) { 
+    catch (e) {
         console.log(e)
         res.send({
             message:e

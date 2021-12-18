@@ -3,10 +3,9 @@ const { pool } = require("../database.js");
 const createNewPlanejamentoQuery = async (user_id, mes, categoria_id, value) => {
 
     return new Promise(function(resolve, reject) {
-        pool.query(`INSERT INTO planejamento(user_id, mes, categoria_id, value)
-        values($1,$2,$3,$4) ON CONFLICT ON CONSTRAINT unique_constraint DO UPDATE SET value=$4;
 
-`,
+        pool.query(`INSERT INTO planejamento(user_id, mes, categoria_id, value)
+        values($1,$2,$3,$4)`,
        [
            user_id,
            mes,
@@ -20,7 +19,7 @@ const createNewPlanejamentoQuery = async (user_id, mes, categoria_id, value) => 
             }
             resolve();
             }
-        ) 
+        )
         }
     )
 }
@@ -54,8 +53,8 @@ const getPlanejamentoQuery = async (query) => {
          console.log(result.rows);
             resolve (result.rows) ;
             })
-       
-        })        
+
+        })
 };
 
 

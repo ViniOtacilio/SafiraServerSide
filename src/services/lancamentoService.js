@@ -14,7 +14,8 @@ const createNewLancamento = async (
   is_parcelado,
   qtd_parcelas,
   dia_cobranca,
-  card_id
+  card_id,
+  data_lancamento
 ) => {
     if (!value || !tipo_de_transacao || !userid) {
     throw "Por favor preencha todos os campos obrigatórios(value, tipo_de_transacao e userid)!"
@@ -73,6 +74,23 @@ const createNewLancamento = async (
 
     }
 
+    if (!data_lancamento){
+      const now = new Date()
+
+      data_lancamento = now.toLocaleString('af-ZA')
+    }
+    else {
+      //TODO - converter em date e adicionar timezone 'America/Sao_Paulo'
+      date_list = data_lancamento.split(' ')[0]
+
+      hours = data_lancamento.split(' ')[1].split(':')
+      hours[0] = parseInt(hours[0]) + 3
+      hours = hours.join(":")
+
+      data_lancamento = date_list + " " + hours
+      console.log(data_lancamento)
+    }
+
     //Criando novo lançamento no banco de dados
     return await registerNewLancamentoQuery.createNewLancamentoQuery(
     value,
@@ -85,7 +103,8 @@ const createNewLancamento = async (
     is_parcelado,
     qtd_parcelas,
     dia_cobranca,
-    card_id
+    card_id,
+    data_lancamento
     );
 
     console.log("lancamento criado");
@@ -255,7 +274,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
     let cur_date = new Date()
 
     let new_data = []
-    
+
     let data = await getLancamentoQuery( base_query );
 
     //new_data = [];
@@ -265,7 +284,7 @@ const getLancamentoByUser = async (user_id, id, status, titulo, start_date, end_
     for(i=0; i<data.length;i++){
         if(data[i].parcelado == true){
             const lancamento = JSON.parse(JSON.stringify(data[i]))
-            
+
             var parcelas = lancamento.qtd_parcelas
             var data_lanc = new Date(Date.parse(lancamento.data_lancamento))
             var value = lancamento.value

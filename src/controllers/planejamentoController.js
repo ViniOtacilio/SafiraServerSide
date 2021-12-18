@@ -4,13 +4,11 @@ const { getPlanejamentoMensal } = require('../services/planejamentoService');
 
 const createPlanejamento = async (req, res, next) => {
     const plans = req.body;
+
     months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-    //console.log(plans);
+
     for (let plan of plans.plans) {
-        //console.log('entrou aqui?');
-        //console.log(plan);
-        
-      
+
         if (plan.user_id == null || plan.mes == null || plan.categoria_id == null || plan.value == null) {
             return res.status(500).send({ success: false, error: { message: 'Dados insuficientes para a criação do planejamento' }});
         }
@@ -37,11 +35,9 @@ const createPlanejamento = async (req, res, next) => {
             console.log("ERRO: "+ e);
             return res.status(500).send({ success: false, error: { message: e } });
         }
-
     }
-    
-    return res.status(201)
 
+    return res.status(201).send({ success: true });
 }
 
 const deletePlanejamento = async (req, res, next) => {
@@ -95,7 +91,7 @@ const getPlanejamento = async (req, res, next) => {
                 ON l.categoriaid = c.id
                 WHERE userid = `+ user_id +`
                 AND date_trunc('month', data_lancamento) = to_date('`+mes+`', 'MM-YYYY') GROUP BY c.nome, c.id, date_trunc('month', l.data_lancamento), l.userid)
-    
+
     SELECT  lm.userid, sum(lm.values) AS valor_gasto, lm.nome_categoria, lm.id_categoria, lm.mes, sum(pm.value) AS valor_planejado
         FROM lancamentos_do_mes lm
             LEFT JOIN planejamento pm
