@@ -1,4 +1,4 @@
-const { getCategories } = require('../services/categoriaService'); 
+const { getCategories } = require('../services/categoriaService');
 const { getCategoriaByUser } = require('../services/categoriaService');
 const { createNewCustomCategory } = require('../services/categoriaService');
 const { deleteNewCustomCategory } = require('../services/categoriaService');
@@ -11,13 +11,14 @@ const createCustomCategory = async (req, res, next) => {
 
     try {
         await createNewCustomCategory(user_id, newCategoryName);
-        res.status(201);
+        res.status(201).send({ success: true, message: "Categoria Criada"});
         next();
     }
     catch (e) {
         console.log('erro CATEGORIA: ' + e);
         return res.status(500).send({ success: false, error: { message: e } });
     }
+
 }
 
 const deleteCustomCategory = async (req, res, next) => {
@@ -79,7 +80,7 @@ const getCategoria = async (req, res, next) => {
         res.send(result);
         next();
     }
-    catch (e) { 
+    catch (e) {
         console.log(e)
         res.send({
             message:e
@@ -102,7 +103,7 @@ const getCategoriaSaldo = async (req, res, next) => {
         res.send(result);
         next();
     }
-    catch (e) { 
+    catch (e) {
         console.log(e)
         res.send({
             message:e

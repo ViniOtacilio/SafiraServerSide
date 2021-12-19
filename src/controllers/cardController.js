@@ -10,14 +10,12 @@ const createCard = async (req, res, next) => {
 
     try {
         await createNewCard(user_id, card_name);
-        return res.status(200);
     }
     catch (e) {
         return res.status(500).send({ success: false, error: { message: e } });
     }
 
-
-    return res.status(201);
+    return res.status(201).send({ success: true, message: "Cartão Criado"});
 
 }
 

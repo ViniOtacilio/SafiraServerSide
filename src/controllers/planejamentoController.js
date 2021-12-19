@@ -37,7 +37,7 @@ const createPlanejamento = async (req, res, next) => {
         }
     }
 
-    return res.status(201).send({ success: true });
+    return res.status(201).send({ success: true, message: "Planejamento Criado"});
 }
 
 const deletePlanejamento = async (req, res, next) => {
